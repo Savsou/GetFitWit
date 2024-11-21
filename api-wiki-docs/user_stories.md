@@ -81,7 +81,7 @@ As a logged-in user, I want to be able to delete my workout programs. When I'm o
 
 # **Favorite**
 
-## **Manage Wishlist**
+## **Manage Favorites List**
 
 As a logged-in user, I want to be able to add or remove a workout program from my favorite. When I'm on the /favorite page:
 
@@ -99,12 +99,20 @@ page:
 - I can see the individual workouts listed for each day of the program, including the exercises, sets, and repetitions.
 - If a day is a rest day, it is clearly marked as such.
 
+## **Manage Workout Week to a program**
+
+As a logged-in user, I want to be able to add/remove a workout week to my workout program. When I'm on the /workout-programs/
+page:
+
+- I can click "Add A Week" to create a new workout week to the program.
+- I can click "Remove this Week" to remove a whole workout week to the program.
+
 ## **Add a Workout to a Program**
 
 As a logged-in user, I want to be able to add new workouts to my workout program. When I'm on the /workout-programs/
 page:
 
-- I can click "Add Workout" to create a new workout for a specific day.
+- I can click "Add A Workout" to create a new workout for a specific day.
 - I can enter the workout details, including the exercises, sets, and repetitions for the workout.
 - I can assign the workout to a specific day, with the option to make that day a rest day.
 
