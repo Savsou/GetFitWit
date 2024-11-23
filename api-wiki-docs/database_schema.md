@@ -9,6 +9,7 @@
 | id              | integer   | not null, primary key |
 | email           | string    | not null, unique      |
 | username        | string    | not null, unique      |
+| bio             | string    |                       |
 | hashedPassword  | string    | not null, unique      |
 | profileImageUrl | string    |                       |
 | createdAt       | datetime  | not null              |
@@ -23,14 +24,13 @@ favorites = db.relationship('Favorite', backref='user', cascade="all, delete")
 | column name | data type | details               |
 | ----------- | --------- | --------------------- |
 | id          | integer   | not null, primary key |
-| name        | string    | not null              |
 | userId      | integer   | not null, foreign key |
+| programName | string    | not null              |
 | difficulty  | string    | not null              |
 | type        | string    | not null              |
-| duration    | integer   | not null              |
 | equipment   | string    | not null              |
-| description | string    | not null              |
-| imageUrl    | string    | not null              |
+| description | string    |                       |
+| imageUrl    | string    |                       |
 | createdAt   | datetime  | not null              |
 | updatedAt   | datetime  | not null              |
 
@@ -50,7 +50,6 @@ favorites = db.relationship('Favorite', secondary=favorite_programs, backref='fa
 | ---------------- | --------- | --------------------- |
 | id               | integer   | not null, primary key |
 | workoutProgramId | integer   | not null, foreign key |
-| userId           | integer   | not null, foreign key |
 | createdAt        | datetime  | not null              |
 | updatedAt        | datetime  | not null              |
 
@@ -60,25 +59,30 @@ workouts = db.relationship("Workout", backref="week", cascade="all, delete")
 
 ## `Day`
 
-| column name      | data type | details               |
-| ---------------- | --------- | --------------------- |
-| id               | integer   | not null, primary key |
-| workoutProgramId | integer   | not null, foreign key |
-| weekId           | integer   | not null, foreign key |
-| createdAt        | datetime  | not null              |
-| updatedAt        | datetime  | not null              |
+| column name | data type | details               |
+| ----------- | --------- | --------------------- |
+| id          | integer   | not null, primary key |
+| weekId      | integer   | not null, foreign key |
+| name        | string    | not null              |
+| restDay     | boolean   | default false         |
+| createdAt   | datetime  | not null              |
+| updatedAt   | datetime  | not null              |
 
 workouts = db.relationship("Workout", backref="week", cascade="all, delete")
 
 ## `Workout`
 
-| column name      | data type | details               |
-| ---------------- | --------- | --------------------- |
-| id               | integer   | not null, primary key |
-| workoutProgramId | integer   | not null, foreign key |
-| dayId            | integer   | not null, foreign key |
-| createdAt        | datetime  | not null              |
-| updatedAt        | datetime  | not null              |
+| column name | data type | details               |
+| ----------- | --------- | --------------------- |
+| id          | integer   | not null, primary key |
+| dayId       | integer   | not null, foreign key |
+| exercise    | string    | not null              |
+| sets        | integer   |                       |
+| reps        | integer   |                       |
+| duration    | integer   |                       |
+| weight      | integer   |                       |
+| createdAt   | datetime  | not null              |
+| updatedAt   | datetime  | not null              |
 
 ## `Favorite`
 
