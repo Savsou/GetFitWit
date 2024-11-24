@@ -78,8 +78,8 @@ Users can create a new account by signing up.
   - **Body**:
     ```json
     {
-      "username": "desired_username",
       "email": "user@example.com",
+      "username": "desired_username",
       "password": "your_password",
       "confirm_password": "your_password"
     }
@@ -264,7 +264,7 @@ Users should be able to view all Workout Programs.
 - **Request**
 
   - **Method**: GET
-  - **Route path**: /api/workout_programs/:id
+  - **Route path**: /api/workout_programs/:workoutProgramId
   - **Body**: None
 
 - **Successful Response**
@@ -274,6 +274,7 @@ Users should be able to view all Workout Programs.
     ```json
     {
       "id": 1,
+      "userId": 1,
       "programName": "Beginner Program",
       "difficulty": "Beginner",
       "type": "Full Body, Arms, Shoulders, Chest",
@@ -374,7 +375,7 @@ Users should be able to view all Workout Programs.
 - **Request**
 
   - **Method**: PUT
-  - **Route path**: /api/workout_programs/:id
+  - **Route path**: /api/workout_programs/:workoutProgramId
   - **Body**:
     ```json
     {
@@ -411,7 +412,7 @@ Users should be able to view all Workout Programs.
 - **Request**
 
   - **Method**: DELETE
-  - **Route path**: /api/workout_programs/:id
+  - **Route path**: /api/workout_programs/:workoutProgramId
   - **Body**: None
 
 - **Successful Response**
@@ -680,7 +681,7 @@ Users can view all workouts for a specific day.
   ]
   ```
 
-### Get A Specific Workout By Id For A Day
+### Get A Specific Workout By Id
 
 Users can view a specific workout for a day.
 
