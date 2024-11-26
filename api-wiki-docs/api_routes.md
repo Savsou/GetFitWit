@@ -466,7 +466,7 @@ Users can view a specific week for a workout program.
 - **Request**
 
   - **Method**: GET
-  - **Route path**: /api/workout_programs/:workoutProgramId/weeks/:weekId
+  - **Route path**: /api/weeks/:weekId
 
 - **Successful Response**:
   - **Status Code**: 200
@@ -497,7 +497,7 @@ Users can create a new week for a workout program. When a new week is created, t
 - **Request**
 
   - **Method**: POST
-  - **Route path**: /api/workout_programs/:workoutProgramId/weeks
+  - **Route path**: /api/weeks
   - **Body**:
     ```json
     {
@@ -533,7 +533,7 @@ Users can delete a week from a workout program. Deleting the week will also remo
 
 - **Method**: DELETE
 
-  - **Route path**: /api/workout_programs/<workoutProgramId>/weeks/<weekId>
+  - **Route path**: /api/weeks/:weekId
   - **Body**: None
 
 - **Successful Response**:
@@ -863,7 +863,7 @@ Users can add a workout program to their favorite list.
 - **Require authentication**: True
 - **Request**
 
-  - **Method**: PUT
+  - **Method**: POST
   - **Route path**: /api/favorites
   - **Body**:
     ```json
