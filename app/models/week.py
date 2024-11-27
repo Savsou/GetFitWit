@@ -15,7 +15,7 @@ class Week(db.Model):
 
     # Relationships
     days = db.relationship("Day", backref="week", cascade="all, delete")
-    workouts = db.relationship("Workout", backref="week", cascade="all, delete")
+    # workouts = db.relationship("Workout", backref="week", cascade="all, delete")
 
     def to_dict(self):
         return {
@@ -24,5 +24,5 @@ class Week(db.Model):
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,
             'days': [day.to_dict() for day in self.days],
-            'workouts': [workout.to_dict() for workout in self.workouts],
+            # 'workouts': [workout.to_dict() for workout in self.workouts],
         }
