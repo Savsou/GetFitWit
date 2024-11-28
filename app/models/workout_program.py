@@ -24,6 +24,13 @@ class WorkoutProgram(db.Model):
     # days = db.relationship("Day", backref="workout_program", cascade="all, delete")
     # workouts = db.relationship("Workout", backref="workout_program", cascade="all, delete")
 
+    def get_all_days(self):
+        all_days = [];
+
+        for week in self.weeks:
+            all_days.extend(week.days)
+        return all_days
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -38,5 +45,6 @@ class WorkoutProgram(db.Model):
             'updatedAt': self.updatedAt,
             'weeks': [week.to_dict() for week in self.weeks],
             # 'days': [day.to_dict() for day in self.days],
+            'days': [day.to_dict() for day in self.get_all_days()],
             # 'workouts': [workout.to_dict() for workout in self.workouts],
         }

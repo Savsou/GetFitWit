@@ -19,11 +19,17 @@ def seed_weeks():
     db.session.add_all(weeks)
     db.session.commit()
 
+    # Create the days of the week for each week
+    for week in weeks:
+        week.create_days()
+
 
 def undo_weeks():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.weeks RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.days RESTART IDENTITY CASCADE;")
     else:
+        db.session.execute(text("DELETE FROM days"))
         db.session.execute(text("DELETE FROM weeks"))
 
     db.session.commit()

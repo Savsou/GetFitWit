@@ -1,5 +1,6 @@
 from datetime import datetime
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .day import Day
 
 
 class Week(db.Model):
@@ -16,6 +17,24 @@ class Week(db.Model):
     # Relationships
     days = db.relationship("Day", backref="week", cascade="all, delete")
     # workouts = db.relationship("Workout", backref="week", cascade="all, delete")
+
+    def create_days(self):
+        # Create all days for the week with specified rest days.
+        days_of_week = [
+            {'name': 'Sunday', 'restDay': True},
+            {'name': 'Monday', 'restDay': False},
+            {'name': 'Tuesday', 'restDay': False},
+            {'name': 'Wednesday', 'restDay': False},
+            {'name': 'Thursday', 'restDay': False},
+            {'name': 'Friday', 'restDay': False},
+            {'name': 'Saturday', 'restDay': True},
+        ]
+
+        for day_data in days_of_week:
+            new_day = Day(name=day_data['name'], restDay=day_data['restDay'], weekId=self.id)
+            db.session.add(new_day)
+
+        db.session.commit()
 
     def to_dict(self):
         return {

@@ -24,13 +24,13 @@ def seed():
         undo_users()
         undo_workout_programs()
         undo_weeks()
-        undo_days()
+        # undo_days()
         undo_workouts()
         undo_favorites()
     seed_users()
     seed_workout_programs()
     seed_weeks()
-    seed_days()
+    # seed_days()
     seed_workouts()
     seed_favorites()
     # Add other seed functions here
@@ -43,6 +43,6 @@ def undo():
     # Add other undo functions here
     undo_workout_programs()
     undo_weeks()
-    undo_days()
+    # undo_days()
     undo_workouts()
     undo_favorites()

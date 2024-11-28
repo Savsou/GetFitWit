@@ -38,10 +38,6 @@ userId references users table.
 
 weeks = db.relationship("Week", backref="workout_program", cascade="all, delete")
 
-days = db.relationship("Day", backref="workout_program", cascade="all, delete")
-
-workouts = db.relationship("Workout", backref="workout_program", cascade="all, delete")
-
 favorites = db.relationship('Favorite', secondary=favorite_programs, backref='favorite_list', cascade='all, delete')
 
 ## `Week`
@@ -54,8 +50,6 @@ favorites = db.relationship('Favorite', secondary=favorite_programs, backref='fa
 | updatedAt        | datetime  | not null              |
 
 days = db.relationship("Day", backref="week", cascade="all, delete")
-
-workouts = db.relationship("Workout", backref="week", cascade="all, delete")
 
 ## `Day`
 
