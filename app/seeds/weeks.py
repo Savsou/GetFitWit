@@ -29,6 +29,7 @@ def undo_weeks():
         db.session.execute(f"TRUNCATE table {SCHEMA}.weeks RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.days RESTART IDENTITY CASCADE;")
     else:
+        # Remove days, work like a tree and remove the ends first
         db.session.execute(text("DELETE FROM days"))
         db.session.execute(text("DELETE FROM weeks"))
 
