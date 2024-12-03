@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import User, db
+from app.models import User, db, Favorite
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -28,9 +28,17 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
-        login_user(user)
-        return user.to_dict()
+        email = form.data['email']
+        password = form.data['password']
+
+        user = User.query.filter(User.email == email).first()
+
+        if user and user.check_password(password):
+            login_user(user)
+            return user.to_dict()
+
+        return {'message': "Login failed. Please check your credentials and try again."}, 401
+
     return form.errors, 401
 
 
@@ -58,8 +66,13 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
+
+        new_favorite = Favorite(userId=user.id)
+        db.session.add(new_favorite)
+
         login_user(user)
         return user.to_dict()
+
     return form.errors, 401
 
 
