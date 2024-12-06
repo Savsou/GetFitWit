@@ -1,5 +1,6 @@
 from datetime import datetime
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.dialects.postgresql import ARRAY
 
 
 class WorkoutProgram(db.Model):
@@ -12,8 +13,8 @@ class WorkoutProgram(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     programName = db.Column(db.String(100), nullable=False)
     difficulty = db.Column(db.String(50), nullable=False)
-    type = db.Column(db.String(50), nullable=False)
-    equipment = db.Column(db.String(100), nullable=False)
+    types = db.Column(ARRAY(db.String), nullable=False)
+    equipments = db.Column(ARRAY(db.String), nullable=False)
     description = db.Column(db.String)
     workoutImageUrl = db.Column(db.String)
     createdAt = db.Column(db.DateTime, default=datetime.now, nullable=False)
@@ -37,8 +38,8 @@ class WorkoutProgram(db.Model):
             'userId': self.userId,
             'programName': self.programName,
             'difficulty': self.difficulty,
-            'type': self.type,
-            'equipment': self.equipment,
+            'types': self.types,
+            'equipments': self.equipments,
             'description': self.description,
             'workoutImageUrl': self.workoutImageUrl,
             'createdAt': self.createdAt,
