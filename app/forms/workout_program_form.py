@@ -38,7 +38,7 @@ def validate_choice(form, field):
     if field.data == '':
         raise ValidationError('Please select a choice.')
 
-class CreateWorkoutProgramForm(FlaskForm):
+class WorkoutProgramForm(FlaskForm):
     programName = StringField('programName', validators=[DataRequired(message="Enter a name for the workout program.")])
     difficulty = SelectField('difficulty', choices=DIFFICULTY_CHOICES, validators=[DataRequired(), validate_choice])
     types = SelectMultipleField(
@@ -53,4 +53,4 @@ class CreateWorkoutProgramForm(FlaskForm):
     )
     description = TextAreaField('description', validators=[Optional()])
     workoutImageUrl = FileField('workoutImageUrl', validators=[Optional(), FileAllowed(list(ALLOWED_EXTENSIONS))])
-    submit = SubmitField('Update Profile')
+    submit = SubmitField('Create Workout Program')

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import WorkoutProgram, db, User
-from app.forms import CreateWorkoutProgramForm
+from app.forms import WorkoutProgramForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3, update_file_on_s3
 
 workout_program_routes = Blueprint('workout_programs', __name__)
@@ -62,7 +62,7 @@ def current_workout_programs():
 @workout_program_routes.route('/')
 @login_required
 def create_workout_program():
-    form = CreateWorkoutProgramForm()
+    form = WorkoutProgramForm()
 
     form["csrf_token"].data = request.cookies.get("csrf_token")
 
@@ -98,6 +98,66 @@ def create_workout_program():
 
 
 #Delete A Workout Program
+@workout_program_routes.route('/<int:workout_program_id>', methods=['DELETE'])
+@login_required
+def delete_workout_program(workout_program_id):
+    workoutProgram = WorkoutProgram.query.get(workout_program_id)
+
+    if not workoutProgram:
+        return {"messasge": "Workout Program not found!"}, 404
+
+    #make sure only the user can delete the program
+    if workoutProgram.userId != current_user.id:
+        return {"message": "You do not have permission to delete this program."}, 403
+
+    #Delete the workout image url from aws
+    image_url = workoutProgram.workoutImageUrl
+
+    if image_url:
+        remove_file_from_s3(image_url)
+
+    db.session.delete(workoutProgram)
+    db.session.commit()
+    return {"message": "Workout Program has been deleted."}
 
 
 #Update A Workout Program
+@workout_program_routes.route('/<int:workout_program_id>', method=['PUT'])
+@login_required
+def update_workout_program(workout_program_id):
+    workoutProgram = WorkoutProgram.query.get(workout_program_id)
+
+    if not workoutProgram:
+        return {"messasge": "Workout Program not found!"}, 404
+
+    #make sure only the user can delete the program
+    if workoutProgram.userId != current_user.id:
+        return {"message": "You do not have permission to delete this program."}, 403
+
+    form = WorkoutProgramForm()
+
+    form["csrf_token"].data = request.cookies.get("csrf_token")
+
+    if form.validate_on_submit():
+        image = form.workoutImageUrl.data
+
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+
+            if "url" not in upload:
+                return {"error": upload["errors"]}, 400
+            workoutProgram.workoutImageUrl = upload["url"]
+
+        # Update fields if provided
+        workoutProgram.programName = form.programName.data or workoutProgram.programName
+        workoutProgram.difficulty = form.difficulty.data or workoutProgram.difficulty
+        workoutProgram.types = form.types.data or workoutProgram.types
+        workoutProgram.equipments = form.equipments.data or workoutProgram.equipments
+        workoutProgram.description = form.description.data or workoutProgram.description
+
+        db.session.commit()
+        return workoutProgram.to_dict(), 200
+
+    if form.errors:
+        return form.errors, 400
