@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import WorkoutProgram, db, User
+from app.models import WorkoutProgram, db, User, Week
 from app.forms import WorkoutProgramForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3, update_file_on_s3
 
@@ -163,7 +163,7 @@ def update_workout_program(workout_program_id):
         return form.errors, 400
 
 
-#Get all weeks by workout program id
+#Get all weeks by Workout Program id
 @workout_program_routes.route('/<int:workout_program_id>/weeks')
 def workout_program_weeks(workout_program_id):
     workoutProgram = WorkoutProgram.query.get(workout_program_id)
@@ -172,3 +172,19 @@ def workout_program_weeks(workout_program_id):
         return {'message': "Workout Program not found!"}, 404
 
     return jsonify([week.to_dict() for week in workoutProgram.weeks])
+
+
+#Get A Specific Week of a Workout Program
+@workout_program_routes.route('/<int:workout_program_id>/weeks/<int:week_id>')
+def workout_week(workout_program_id, week_id):
+    workoutProgram = WorkoutProgram.query.get(workout_program_id)
+
+    if not workoutProgram:
+        return {'message': 'Workout Program not found!'}, 404
+
+    week = Week.query.filter_by(id=week_id, workoutProgramId=workout_program_id).first()
+
+    if not week:
+        return {'message': 'Week not found in workout program!'}, 404
+
+    return week.to_dict()

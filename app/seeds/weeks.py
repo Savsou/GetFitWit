@@ -13,6 +13,15 @@ def seed_weeks():
         {
             'workoutProgramId': 3,
         },
+        {
+            'workoutProgramId': 1,
+        },
+        {
+            'workoutProgramId': 2,
+        },
+        {
+            'workoutProgramId': 3,
+        },
     ]
 
     weeks = [Week(**data) for data in weeks_data]
