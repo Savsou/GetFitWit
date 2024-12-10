@@ -161,3 +161,14 @@ def update_workout_program(workout_program_id):
 
     if form.errors:
         return form.errors, 400
+
+
+#Get all weeks by workout program id
+@workout_program_routes.route('/<int:workout_program_id>/weeks')
+def workout_program_weeks(workout_program_id):
+    workoutProgram = WorkoutProgram.query.get(workout_program_id)
+
+    if not workoutProgram:
+        return {'message': "Workout Program not found!"}, 404
+
+    return jsonify([week.to_dict() for week in workoutProgram.weeks])
