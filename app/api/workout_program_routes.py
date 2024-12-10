@@ -143,7 +143,7 @@ def update_workout_program(workout_program_id):
 
         if image:
             image.filename = get_unique_filename(image.filename)
-            upload = upload_file_to_s3(image)
+            upload = update_file_on_s3(image)
 
             if "url" not in upload:
                 return {"error": upload["errors"]}, 400
