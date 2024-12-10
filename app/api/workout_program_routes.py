@@ -122,7 +122,7 @@ def delete_workout_program(workout_program_id):
 
 
 #Update A Workout Program
-@workout_program_routes.route('/<int:workout_program_id>', method=['PUT'])
+@workout_program_routes.route('/<int:workout_program_id>', methods=['PUT'])
 @login_required
 def update_workout_program(workout_program_id):
     workoutProgram = WorkoutProgram.query.get(workout_program_id)

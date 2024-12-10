@@ -69,6 +69,7 @@ def sign_up():
 
         new_favorite = Favorite(userId=user.id)
         db.session.add(new_favorite)
+        db.session.commit()
 
         login_user(user)
         return user.to_dict()
