@@ -59,7 +59,7 @@ def current_workout_programs():
 
 
 #Create A Workout Program
-@workout_program_routes.route('/')
+@workout_program_routes.route('/', methods=['POST'])
 @login_required
 def create_workout_program():
     form = WorkoutProgramForm()
