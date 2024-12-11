@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import WorkoutProgram, db, User, Week
+from app.models import WorkoutProgram, db, User, Week, Day
 from app.forms import WorkoutProgramForm
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3, update_file_on_s3
+from sqlalchemy.orm import joinedload
 
 workout_program_routes = Blueprint('workout_programs', __name__)
 
@@ -188,3 +189,39 @@ def workout_week(workout_program_id, week_id):
         return {'message': 'Week not found in workout program!'}, 404
 
     return week.to_dict()
+
+
+#Get All Days of a Workout Program
+@workout_program_routes.route('/<int:workout_program_id>/days', methods=['GET'])
+def get_all_days(workout_program_id):
+    workout_program = WorkoutProgram.query.options(
+        joinedload(WorkoutProgram.weeks).joinedload(Week.days)
+    ).get(workout_program_id)
+
+    if not workout_program:
+        return {'message': 'Workout Program not found!'}, 404
+
+    all_days = workout_program.get_all_days()
+
+    return jsonify([day.to_dict() for day in all_days]), 200
+
+
+#Get A Specific Day of a Workout Program
+@workout_program_routes.route('/<int:workout_program_id>/weeks/<int:week_id>/days/<int:day_id>', methods=['GET'])
+def get_day(workout_program_id, week_id, day_id):
+    workout_program = WorkoutProgram.query.get(workout_program_id)
+
+    if not workout_program:
+        return {'message': 'Workout Program not found!'}, 404
+
+    week = Week.query.filter_by(id=week_id, workoutProgramId=workout_program_id).first()
+
+    if not week:
+        return {'message': 'Week not found!'}, 404
+
+    day = Day.query.filter_by(id=day_id, weekId=week_id).first()
+
+    if not day:
+        return {'message': 'Day not found!'}, 404
+
+    return day.to_dict(), 200
