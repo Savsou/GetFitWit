@@ -11,6 +11,7 @@ class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     dayId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("days.id")), nullable=False)
     exercise = db.Column(db.String(100), nullable=False)
+    workout_type = db.Column(db.String(50), nullable=False)
     sets = db.Column(db.Integer)
     reps = db.Column(db.Integer)
     duration = db.Column(db.Integer)
@@ -23,6 +24,7 @@ class Workout(db.Model):
             'id': self.id,
             'dayId': self.dayId,
             'exercise': self.exercise,
+            'workout_type': self.workout_type,
             'sets': self.sets,
             'reps': self.reps,
             'duration': self.duration,

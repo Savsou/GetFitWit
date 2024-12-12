@@ -30,3 +30,16 @@ def toggle_rest_day(day_id):
     db.session.commit()
 
     return jsonify(day.to_dict()), 200
+
+
+#Get All Workouts by Specific Day
+@days_routes.route('/<int:day_id>/workouts')
+def workouts_by_day(day_id):
+    day = Day.query.get(day_id)
+
+    if not day:
+        return {'message': 'Day not found!'}, 404
+
+    workouts = day.workouts
+
+    return {'workouts': [workout.to_dict() for workout in workouts]}, 200

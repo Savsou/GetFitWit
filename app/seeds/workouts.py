@@ -6,6 +6,7 @@ def seed_workouts():
     workouts_data = [
         {
             'dayId': 1,
+            'workout_type': 'sets_reps',
             'exercise': 'Push-ups',
             'sets': 3,
             'reps': 12,
@@ -14,6 +15,7 @@ def seed_workouts():
         },
         {
             'dayId': 1,
+            'workout_type': 'sets_reps',
             'exercise': 'Dumbbell Bench Press',
             'sets': 4,
             'reps': 8,
@@ -22,6 +24,7 @@ def seed_workouts():
         },
         {
             'dayId': 2,
+            'workout_type': 'sets_reps',
             'exercise': 'Squats',
             'sets': 4,
             'reps': 10,
