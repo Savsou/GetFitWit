@@ -14,7 +14,8 @@ class Workout(db.Model):
     workout_type = db.Column(db.String(50), nullable=False)
     sets = db.Column(db.Integer)
     reps = db.Column(db.Integer)
-    duration = db.Column(db.Integer)
+    minutes = db.Column(db.Integer)
+    seconds = db.Column(db.Integer)
     weight = db.Column(db.Integer)
     createdAt = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updatedAt = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, nullable=False)
@@ -27,7 +28,8 @@ class Workout(db.Model):
             'workout_type': self.workout_type,
             'sets': self.sets,
             'reps': self.reps,
-            'duration': self.duration,
+            'minutes': self.minutes,
+            'seconds': self.seconds,
             'weight': self.weight,
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,

@@ -3,26 +3,32 @@ from sqlalchemy.sql import text
 
 def seed_weeks():
 
-    weeks_data = [
-        {
-            'workoutProgramId': 1,
-        },
-        {
-            'workoutProgramId': 2,
-        },
-        {
-            'workoutProgramId': 3,
-        },
-        {
-            'workoutProgramId': 1,
-        },
-        {
-            'workoutProgramId': 2,
-        },
-        {
-            'workoutProgramId': 3,
-        },
-    ]
+    # weeks_data = [
+    #     {
+    #         'workoutProgramId': 1,
+    #     },
+    #     {
+    #         'workoutProgramId': 2,
+    #     },
+    #     {
+    #         'workoutProgramId': 3,
+    #     },
+    #     {
+    #         'workoutProgramId': 1,
+    #     },
+    #     {
+    #         'workoutProgramId': 2,
+    #     },
+    #     {
+    #         'workoutProgramId': 3,
+    #     },
+    # ]
+
+    #Instead of doing each individual week, use a loop
+    weeks_data = []
+    for i in range(1, 21):
+        weeks_data.append({'workoutProgramId': i})
+        weeks_data.append({'workoutProgramId': i})
 
     weeks = [Week(**data) for data in weeks_data]
     db.session.add_all(weeks)

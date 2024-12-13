@@ -3,35 +3,39 @@ from sqlalchemy.sql import text
 
 def seed_workouts():
 
-    workouts_data = [
-        {
-            'dayId': 1,
+    workouts_data = []
+
+    for day_id in range(1, 141):
+        workouts_data.append({
+            'dayId': day_id,
             'workout_type': 'sets_reps',
             'exercise': 'Push-ups',
             'sets': 3,
             'reps': 12,
-            'duration': None,
-            'weight': None,
-        },
-        {
-            'dayId': 1,
+            'minutes': 0,
+            'seconds': 0,
+            'weight': 0,
+        })
+        workouts_data.append({
+            'dayId': day_id,
             'workout_type': 'sets_reps',
             'exercise': 'Dumbbell Bench Press',
             'sets': 4,
             'reps': 8,
-            'duration': None,
+            'minutes': 0,
+            'seconds': 0,
             'weight': 50,
-        },
-        {
-            'dayId': 2,
-            'workout_type': 'sets_reps',
-            'exercise': 'Squats',
-            'sets': 4,
-            'reps': 10,
-            'duration': None,
-            'weight': 100,
-        },
-    ]
+        })
+        workouts_data.append({
+            'dayId': day_id,
+            'workout_type': 'time_based',
+            'exercise': 'Plank',
+            'sets': 0,
+            'reps': 0,
+            'minutes': 1,
+            'seconds': 30,
+            'weight': 0,
+        })
 
     workouts = [Workout(**data) for data in workouts_data]
     db.session.add_all(workouts)

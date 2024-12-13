@@ -30,7 +30,8 @@ def create_workout():
         exercise = form.exercise.data
         sets = form.sets.data or 0
         reps = form.reps.data or 0
-        duration = form.duration.data or 0
+        minutes = form.minutes.data or 0
+        seconds = form.seconds.data or 0
         weight = form.weight.data or 0
 
         day = Day.query.get(day_id)
@@ -54,7 +55,8 @@ def create_workout():
             workout_type=workout_type,
             sets=sets,
             reps=reps,
-            duration=duration,
+            minutes=minutes,
+            seconds=seconds,
             weight=weight
         )
 
@@ -119,7 +121,8 @@ def update_workout(workout_id):
         workout.exercise = form.exercise.data
         workout.sets = form.sets.data or 0
         workout.reps = form.reps.data or 0
-        workout.duration = form.duration.data or 0
+        workout.minutes = form.minutes.data or 0
+        workout.seconds = form.seconds.data or 0
         workout.weight = form.weight.data or 0
 
         db.session.commit()
