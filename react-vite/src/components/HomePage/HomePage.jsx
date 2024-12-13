@@ -9,9 +9,9 @@ const HomePage = () => {
     const pagination = useSelector((state) => state.workoutPrograms.pagination);
 
     useEffect(() => {
-        dispatch(fetchWorkoutPrograms('Beginner', 1));
-        dispatch(fetchWorkoutPrograms('Intermediate', 1));
-        dispatch(fetchWorkoutPrograms('Advanced', 1));
+        dispatch(fetchWorkoutPrograms('beginner', 1));
+        dispatch(fetchWorkoutPrograms('intermediate', 1));
+        dispatch(fetchWorkoutPrograms('advanced', 1));
     }, [dispatch]);
 
     const handlePagination = (difficulty, direction) => {
