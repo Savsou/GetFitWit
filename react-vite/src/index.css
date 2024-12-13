@@ -1,1 +1,128 @@
 /* TODO: Add sitewide styles */
+html, body{
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+.error-message {
+    color: red;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(0, 6, 9, 0.6)
+  }
+
+#modal-content {
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+    background-color: rgb(255, 255, 255);
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(160, 160, 160);
+}
+
+.modal-content {
+    background-color: rgb(245, 245, 245);
+    padding-top: 25px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.label-name{
+    color: rgb(31, 0, 0);
+    width: 70%;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 300;
+}
+
+.form-group input{
+    width: 360px;
+    height: 30px;
+    border: 1px solid rgb(140, 140, 140);
+    outline-color: rgb(51, 51, 51);
+    background-color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.form-group input:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.form-group button{
+    background-color: rgb(198, 0, 49);
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 700px;
+    text-align: center;
+    width: 120px;
+    height: 36px;
+}
+
+.form-group button:hover{
+    cursor: pointer;
+  }
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: none;
+}

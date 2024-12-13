@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
+import { useNavigate } from "react-router-dom";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,7 @@ function SignupFormModal() {
         email,
         username,
         password,
+        confirmPassword,
       })
     );
 
@@ -35,55 +38,66 @@ function SignupFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
+      navigate('/');
     }
   };
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1 className="modal-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+      <form className="modal-content" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="label-name">Email</label>
+          <div className="input-error">
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <p className="error-message">{errors.email}</p>}
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label className="label-name">Username</label>
+          <div className="input-error">
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {errors.username && <p className="error-message">{errors.username}</p>}
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label className="label-name">Password</label>
+          <div className="input-error">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && <p className="error-message">{errors.password}</p>}
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label className="label-name">Confirm Password</label>
+            <div className="input-error">
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+            </div>
+        </div>
+
+        <div className="form-group">
+          <button type="submit">Sign Up</button>
+        </div>
       </form>
     </>
   );
