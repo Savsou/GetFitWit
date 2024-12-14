@@ -6,6 +6,7 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
+import "./ProfileButton.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button onClick={toggleMenu} className="profile-button">
         <FaUserCircle />
       </button>
       {showMenu && (
