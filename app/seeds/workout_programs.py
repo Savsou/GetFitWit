@@ -10,6 +10,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['strength'],
             'equipments': ['dumbbells'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A 4-week strength building program.',
         },
         {
@@ -18,6 +19,7 @@ def seed_workout_programs():
             'difficulty': 'beginner',
             'types': ['cardio'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'High-intensity cardio program for beginners.',
         },
         {
@@ -26,6 +28,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['abs'],
             'equipments': ['mat'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Advanced core training for strong abs.',
         },
         {
@@ -34,6 +37,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['legs'],
             'equipments': ['barbell', 'dumbbells'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'An intermediate program focused on leg strength.',
         },
         {
@@ -42,6 +46,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['cardio'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A 2-week high-intensity interval challenge.',
         },
         {
@@ -50,6 +55,7 @@ def seed_workout_programs():
             'difficulty': 'beginner',
             'types': ['full_body'],
             'equipments': ['mat'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A program to improve flexibility and mobility.',
         },
         {
@@ -58,6 +64,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['cardio'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A 6-week endurance training program.',
         },
         {
@@ -66,6 +73,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['strength'],
             'equipments': ['dumbbells', 'barbell'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A program focused on muscle hypertrophy.',
         },
         {
@@ -74,6 +82,7 @@ def seed_workout_programs():
             'difficulty': 'beginner',
             'types': ['full_body'],
             'equipments': ['mat'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Basic yoga postures and breathing techniques.',
         },
         {
@@ -82,6 +91,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['strength'],
             'equipments': ['barbell', 'bench'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A prep program for powerlifting competitions.',
         },
         {
@@ -90,6 +100,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['strength'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Full-body workouts using only bodyweight.',
         },
         {
@@ -98,6 +109,7 @@ def seed_workout_programs():
             'difficulty': 'beginner',
             'types': ['cardio'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Quick and intense HIIT sessions for fat loss.',
         },
         {
@@ -106,6 +118,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['abs'],
             'equipments': ['mat'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Core-focused pilates exercises.',
         },
         {
@@ -114,6 +127,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['full_body'],
             'equipments': ['kettlebell', 'resistance_band'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Functional movements for everyday strength.',
         },
         {
@@ -122,6 +136,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['chest', 'shoulders'],
             'equipments': ['barbell', 'bench'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Intermediate program focused on chest and shoulders.',
         },
         {
@@ -130,6 +145,7 @@ def seed_workout_programs():
             'difficulty': 'beginner',
             'types': ['full_body'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A holistic approach to weight loss.',
         },
         {
@@ -138,6 +154,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['full_body'],
             'equipments': ['dumbbells'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Intense workouts to boost metabolism.',
         },
         {
@@ -146,6 +163,7 @@ def seed_workout_programs():
             'difficulty': 'intermediate',
             'types': ['full_body'],
             'equipments': ['barbell', 'kettlebell'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'Introduction to CrossFit methodologies.',
         },
         {
@@ -154,6 +172,7 @@ def seed_workout_programs():
             'difficulty': 'advanced',
             'types': ['full_body', 'cardio'],
             'equipments': ['none'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'A military-style boot camp program.',
         },
         {
@@ -162,6 +181,7 @@ def seed_workout_programs():
             'difficulty': 'beginner',
             'types': ['strength'],
             'equipments': ['dumbbells'],
+            'workoutImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg',
             'description': 'An introductory lifting program for beginners.',
         },
     ]

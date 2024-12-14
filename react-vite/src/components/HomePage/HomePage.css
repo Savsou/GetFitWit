@@ -1,0 +1,14 @@
+.workout-homepage-container {
+    margin: 0 10%;
+}
+
+h2 {
+    margin-top: 50px;
+}
+
+.workout-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}

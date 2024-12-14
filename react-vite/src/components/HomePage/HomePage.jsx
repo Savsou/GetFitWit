@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorkoutPrograms } from '../../redux/workoutprogram';
+import WorkoutProgramCard from '../WorkoutsDetailsPage/WorkoutCard'
+import './HomePage.css'
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -27,15 +29,17 @@ const HomePage = () => {
 
     return (
 
-        <div>
+        <div className='workout-homepage-container'>
 
             {/* Beginner Programs */}
             <div>
                 <h2>Beginner Programs</h2>
-                <ul>
-                    {workoutPrograms.beginner.map((program) => (
-                        <li key={program.id}>{program.programName}</li>
-                    ))}
+                <ul className='workout-programs-list'>
+                    <div className='workout-card-container'>
+                        {workoutPrograms.beginner.map((program) => (
+                            <WorkoutProgramCard key={program.id} program={program} />
+                        ))}
+                    </div>
                 </ul>
                 <button
                     onClick={() => handlePagination('beginner', 'prev')}
@@ -54,10 +58,12 @@ const HomePage = () => {
             {/* Intermediate Programs */}
             <div>
                 <h2>Intermediate Programs</h2>
-                <ul>
-                    {workoutPrograms.intermediate.map((program) => (
-                        <li key={program.id}>{program.programName}</li>
-                    ))}
+                <ul className='workout-programs-list'>
+                    <div className='workout-card-container'>
+                        {workoutPrograms.intermediate.map((program) => (
+                            <WorkoutProgramCard key={program.id} program={program} />
+                        ))}
+                    </div>
                 </ul>
                 <button
                     onClick={() => handlePagination('intermediate', 'prev')}
@@ -79,10 +85,12 @@ const HomePage = () => {
             {/* Advanced Programs */}
             <div>
                 <h2>Advanced Programs</h2>
-                <ul>
-                    {workoutPrograms.advanced.map((program) => (
-                        <li key={program.id}>{program.programName}</li>
-                    ))}
+                <ul className='workout-programs-list'>
+                    <div className='workout-card-container'>
+                        {workoutPrograms.advanced.map((program) => (
+                            <WorkoutProgramCard key={program.id} program={program} />
+                        ))}
+                    </div>
                 </ul>
                 <button
                     onClick={() => handlePagination('advanced', 'prev')}
