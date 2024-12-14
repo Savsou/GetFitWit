@@ -1,9 +1,25 @@
+.profile-favorite {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.favorite-star {
+    height: 33px;
+    font-size: 23px;
+    color: black;
+}
+
+.favorite-star:visited {
+    color: inhert;
+}
+
 .profile-button {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 28px;
-    color: white;
+    color: black;
 }
 
 .profile-dropdown {

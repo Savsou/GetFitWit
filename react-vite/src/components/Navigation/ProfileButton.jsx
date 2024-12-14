@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { FaUserCircle } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -45,9 +48,14 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu} className="profile-button">
-        <FaUserCircle />
-      </button>
+      <div className="profile-favorite">
+        <NavLink className="favorite-star" to="/favorites">
+          <FontAwesomeIcon icon={faRegularStar}/>
+        </NavLink>
+        <button onClick={toggleMenu} className="profile-button">
+          <FaUserCircle />
+        </button>
+      </div>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
