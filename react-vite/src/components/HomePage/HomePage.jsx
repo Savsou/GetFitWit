@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorkoutPrograms } from '../../redux/workoutprogram';
-import WorkoutProgramCard from '../WorkoutsDetailsPage/WorkoutCard'
+import WorkoutProgramCard from '../WorkoutsPrograms/WorkoutProgramCard'
 import './HomePage.css'
 
 const HomePage = () => {
@@ -29,7 +29,7 @@ const HomePage = () => {
 
     return (
 
-        <div className='workout-homepage-container'>
+        <div className='page-container'>
 
             {/* Beginner Programs */}
             <div>

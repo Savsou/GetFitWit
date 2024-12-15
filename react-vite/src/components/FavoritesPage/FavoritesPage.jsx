@@ -2,7 +2,7 @@
 const FavoritesPage = () => {
 
     return (
-        <div>
+        <div className="page-container">
             <h1>Favorites Page</h1>
         </div>
     )

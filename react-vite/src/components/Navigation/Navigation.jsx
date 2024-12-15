@@ -21,9 +21,14 @@ function Navigation() {
 
         {user ? (
           <>
-            <li>
-              <ProfileButton />
-            </li>
+            <div className="user-right">
+              <NavLink to={'/workout_programs/new'} className="create-program-link">
+                <p>Create A Program</p>
+              </NavLink>
+              <li>
+                <ProfileButton />
+              </li>
+            </div>
           </>
         ) : (
           <>

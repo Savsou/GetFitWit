@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import './WorkoutCard.css'
+import './WorkoutProgramCard.css'
 
-const WorkoutCard = ({program}) => {
+const WorkoutProgramCard = ({program}) => {
 
+    //Capitalize the first letter in Difficulty
     const formattedDifficulty = program.difficulty.charAt(0).toUpperCase() + program.difficulty.slice(1);
 
     // Capitalize each word in Types
@@ -38,4 +39,4 @@ const WorkoutCard = ({program}) => {
     )
 }
 
-export default WorkoutCard
+export default WorkoutProgramCard
