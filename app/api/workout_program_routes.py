@@ -67,6 +67,11 @@ def create_workout_program():
 
     form["csrf_token"].data = request.cookies.get("csrf_token")
 
+    #Ensure the types and equipments field are populated correctly for validation by populating
+    #the form with the data from the request
+    form.types.process(request.form)
+    form.equipments.process(request.form)
+
     if form.validate_on_submit():
         image = form.workoutImageUrl.data
         if image:

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addWorkoutProgram } from "../../redux/workoutprogram";
 import "./CreateWorkoutProgram.css";
+import ConfirmationModal from "../../context/ConfirmationModal";
 
 const CreateWorkoutProgram = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const CreateWorkoutProgram = () => {
     const fileInputRef = useRef(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [errors, setErrors] = useState({});
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const WORKOUT_TYPES = [
         { value: 'full_body', label: 'Full Body' },
@@ -46,7 +48,9 @@ const CreateWorkoutProgram = () => {
         { value: 'advanced', label: 'Advanced' },
     ];
 
-    const handleFileClick = () => {
+    const handleFileClick = (e) => {
+        e.preventDefault();
+
         fileInputRef.current.click();
     };
 
@@ -82,8 +86,9 @@ const CreateWorkoutProgram = () => {
         const formData = new FormData();
         formData.append("programName", programName);
         formData.append("difficulty", difficulty);
-        formData.append("types", types);
-        formData.append("equipments", equipments);
+        //Send each type and equipment separately
+        types.forEach(type => formData.append("types", type));
+        equipments.forEach(equipment => formData.append("equipments", equipment));
         formData.append("description", description);
 
         if (workoutImageUrl) {
@@ -92,9 +97,12 @@ const CreateWorkoutProgram = () => {
 
         const serverResponse = await dispatch(addWorkoutProgram(formData));
 
+        console.log(serverResponse);
+
         if (serverResponse) {
             setErrors(serverResponse)
         } else {
+            setShowConfirmModal(true);
             setProgramName('');
             setDifficulty('');
             setTypes([]);
@@ -115,7 +123,7 @@ const CreateWorkoutProgram = () => {
     }, [previewImage]);
 
     return (
-        <div className="page-container">
+        <div className="page-container create-program">
             <form onSubmit={handleSubmit} encType="multipart/form-data" className="add-workout-program-form">
                 <div className="create-workout-program-container">
                     <h1 className="workout-form-header">Create A New Workout Program</h1>
@@ -131,7 +139,7 @@ const CreateWorkoutProgram = () => {
                                 className="program-name"
                             />
                         </label>
-                        {errors.programName && <span className="error">{errors.programName}</span>}
+                        {errors.programName && <span className="error-message">{errors.programName}</span>}
                     </div>
 
                     <div className="input-group">
@@ -147,34 +155,43 @@ const CreateWorkoutProgram = () => {
                                 ))}
                             </select>
                         </label>
+                        {errors.difficulty && <span className="error-message">{errors.difficulty}</span>}
                     </div>
 
                     <div className="input-group">
                         <label>Workout Types:</label>
-                        {WORKOUT_TYPES.map(({ value, label }) => (
-                            <label key={value}>
-                                <input
-                                    type="checkbox"
-                                    value={value}
-                                    onChange={(e) => handleCheckboxChange(e, setTypes)}
-                                />
-                                {label}
-                            </label>
-                        ))}
+                        <div className="checkbox-group">
+                            {WORKOUT_TYPES.map(({ value, label }) => (
+                                <label key={value}>
+                                    <input
+                                        type="checkbox"
+                                        value={value}
+                                        checked={types.includes(value)}
+                                        onChange={(e) => handleCheckboxChange(e, setTypes)}
+                                    />
+                                    {label}
+                                </label>
+                            ))}
+                        </div>
+                        {errors.types && <span className="error-message">{errors.types}</span>}
                     </div>
 
                     <div className="input-group">
                         <label>Equipments:</label>
-                        {EQUIPMENT_CHOICES.map(({ value, label }) => (
-                            <label key={value}>
-                                <input
-                                    type="checkbox"
-                                    value={value}
-                                    onChange={(e) => handleCheckboxChange(e, setEquipments)}
-                                />
-                                {label}
-                            </label>
-                        ))}
+                        <div className="checkbox-group">
+                            {EQUIPMENT_CHOICES.map(({ value, label }) => (
+                                <label key={value}>
+                                    <input
+                                        type="checkbox"
+                                        value={value}
+                                        checked={equipments.includes(value)}
+                                        onChange={(e) => handleCheckboxChange(e, setEquipments)}
+                                    />
+                                    {label}
+                                </label>
+                            ))}
+                        </div>
+                        {errors.equipments && <span className="error-message">{errors.equipments}</span>}
                     </div>
 
                     <div className="input-group">
@@ -186,10 +203,11 @@ const CreateWorkoutProgram = () => {
                             placeholder="Enter a description (optional)"
                         >
                         </textarea>
+                        {errors.description && <span className="error-message">{errors.description}</span>}
                     </div>
 
                     <div className="input-group">
-                        <button onClick={handleFileClick}>Upload Image</button>
+                        <button type="button" onClick={handleFileClick}>Upload Image</button>
                         <input
                             type="file"
                             ref={fileInputRef}
@@ -206,9 +224,10 @@ const CreateWorkoutProgram = () => {
                                     alt="Workout Preview"
                                     style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                                 />
-                                <button onClick={handleClearFile}>Remove Image</button>
+                                <button type="button" onClick={handleClearFile}>Remove Image</button>
                             </div>
                         )}
+                        {errors.workoutImageUrl && <span className="error-message">{errors.workoutImageUrl}</span>}
                     </div>
 
                     <div className="submission-buttons">
@@ -226,6 +245,17 @@ const CreateWorkoutProgram = () => {
                     </div>
                 </div>
             </form>
+
+            {showConfirmModal && (
+                <ConfirmationModal
+                onClose={() => {
+                    setShowConfirmModal(false)
+                    navigate('/');
+                }}
+                message={"You have created a workout program!"}
+                />
+            )}
+
         </div>
     )
 }

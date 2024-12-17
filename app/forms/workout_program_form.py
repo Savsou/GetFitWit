@@ -34,13 +34,13 @@ DIFFICULTY_CHOICES = [
 ]
 
 #If a selectfield is not picked, the placeholder counts as a valid Data.
-def validate_choice(form, field):
-    if field.data == '':
-        raise ValidationError('Please select a choice.')
+# def validate_choice(form, field):
+#     if field.data == '':
+#         raise ValidationError('Please select a choice.')
 
 class WorkoutProgramForm(FlaskForm):
     programName = StringField('programName', validators=[DataRequired(message="Enter a name for the workout program.")])
-    difficulty = SelectField('difficulty', choices=DIFFICULTY_CHOICES, validators=[DataRequired(), validate_choice])
+    difficulty = SelectField('difficulty', choices=DIFFICULTY_CHOICES, validators=[DataRequired(message="Choose a difficulty for the program.")])
     types = SelectMultipleField(
         'types',
         choices=WORKOUT_TYPES,
