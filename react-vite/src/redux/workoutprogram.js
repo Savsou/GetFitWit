@@ -1,6 +1,8 @@
 const SET_WORKOUT_PROGRAMS = "workoutPrograms/setWorkoutPrograms";
 const ADD_WORKOUT_PROGRAM = "workoutPrograms/addWorkoutProgram";
 const UPDATE_WORKOUT_PROGRAM = "workoutPrograms/updateWorkoutProgram";
+const SET_WORKOUT_PROGRAM_BY_ID = "workoutPrograms/setWorkoutProgramById";
+const SET_LOADING = 'SET_LOADING';
 
 const setWorkoutPrograms = (difficulty, workoutPrograms, totalPages, currentPage) => ({
     type: SET_WORKOUT_PROGRAMS,
@@ -12,6 +14,16 @@ const setWorkoutPrograms = (difficulty, workoutPrograms, totalPages, currentPage
     },
 });
 
+const setWorkoutProgramById = (workoutProgram) => ({
+    type: SET_WORKOUT_PROGRAM_BY_ID,
+    payload: workoutProgram,
+})
+
+export const setLoading = (loading) => ({
+    type: SET_LOADING,
+    payload: loading
+});
+
 const addWorkoutProgramAction = (workoutProgram) => ({
     type: ADD_WORKOUT_PROGRAM,
     payload: workoutProgram,
@@ -21,6 +33,7 @@ const updateWorkoutProgramAction = (workoutProgram) => ({
     type: UPDATE_WORKOUT_PROGRAM,
     payload: workoutProgram,
 })
+
 
 export const fetchWorkoutPrograms = (difficulty, page) => async (dispatch) => {
     try {
@@ -38,7 +51,26 @@ export const fetchWorkoutPrograms = (difficulty, page) => async (dispatch) => {
     }
 };
 
-export const addWorkoutProgram = (formData) => async dispatch => {
+export const fetchWorkoutProgramById = (id) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const response = await fetch(`/api/workout_programs/${id}`);
+
+        if (!response.ok) {
+            console.error("Failed. Workout Program does not exist.");
+            return;
+        }
+
+        const data = await response.json();
+        dispatch(setWorkoutProgramById(data))
+    } catch (e) {
+        console.error("Failed to fetch workout program:", e)
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
+export const addWorkoutProgram = (formData) => async (dispatch) => {
     try {
         const response = await fetch('/api/workout_programs/', {
             method: 'POST',
@@ -64,9 +96,13 @@ export const addWorkoutProgram = (formData) => async dispatch => {
 const initialState = {
     workoutPrograms: {},
     pagination: {},
+    currentWorkoutProgram: null,
+    loading: false,
 };
 
 const workoutProgramReducer = (state = initialState, action) => {
+
+
     switch (action.type) {
         case SET_WORKOUT_PROGRAMS: {
             const { difficulty, workoutPrograms, totalPages, currentPage } = action.payload;
@@ -84,6 +120,21 @@ const workoutProgramReducer = (state = initialState, action) => {
             };
 
             return newState;
+        }
+
+        case SET_WORKOUT_PROGRAM_BY_ID: {
+            const workoutProgram = action.payload;
+            return {
+                ...state,
+                currentWorkoutProgram: workoutProgram,
+            };
+        }
+
+        case SET_LOADING: {
+            return {
+                ...state,
+                loading: action.payload
+            }
         }
 
         case ADD_WORKOUT_PROGRAM: {

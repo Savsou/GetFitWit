@@ -46,6 +46,7 @@ class WorkoutProgram(db.Model):
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,
             'weeks': [week.to_dict() for week in self.weeks],
+            'creatorUsername': self.user.username,
             # 'days': [day.to_dict() for day in self.days],
             # 'days': [day.to_dict() for day in self.get_all_days()],
             # 'workouts': [workout.to_dict() for workout in self.workouts],
