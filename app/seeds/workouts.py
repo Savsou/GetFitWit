@@ -28,7 +28,7 @@ def seed_workouts():
         })
         workouts_data.append({
             'dayId': day_id,
-            'workout_type': 'time_based',
+            'workout_type': 'duration',
             'exercise': 'Plank',
             'sets': 0,
             'reps': 0,

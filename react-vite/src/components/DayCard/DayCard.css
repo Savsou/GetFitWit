@@ -1,0 +1,103 @@
+.day-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    height: 400px;
+}
+
+.day-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.day-card h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    border-bottom: 1px dotted black;
+}
+
+.rest-day-status {
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0;
+}
+
+.day-card p {
+    font-size: 1rem;
+}
+
+.workouts {
+    display: flex;
+    flex-direction: column;
+}
+
+.workout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 15px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.workout-info {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 20px;
+    overflow: hidden;
+}
+
+.sets-reps, .duration {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.exercise-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.weights {
+    font-size: 0.9rem;
+    color: #007bff;
+    font-weight: bold;
+    text-align: right;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .workout {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .weights {
+        margin-top: 5px;
+    }
+}
+
+.see-more {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
