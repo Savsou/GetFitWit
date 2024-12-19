@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWorkoutProgramById } from "../../redux/workoutprogram";
+import { fetchWorkoutProgramById, deleteWorkoutProgram, fetchWorkoutPrograms } from "../../redux/workoutprogram";
+import { useNavigate } from "react-router-dom";
 import ConfirmingModal from "../../context/ConfirmingModal";
 import DayCard from "../DayCard";
 import "./WorkoutProgramDetailsPage.css"
@@ -9,6 +10,7 @@ import "./WorkoutProgramDetailsPage.css"
 const WorkoutProgramDetailsPage = () => {
     const { workoutProgramId } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const currentWorkoutProgram = useSelector(state => state.workoutPrograms.currentWorkoutProgram);
     const isLoading = useSelector(state => state.workoutPrograms.loading);
     const currentUser = useSelector(state => state.session.user);
@@ -16,6 +18,7 @@ const WorkoutProgramDetailsPage = () => {
     const [weekToDelete, setWeekToDelete] = useState();
     const [weeks, setWeeks] = useState([]);
     const [isAddingWeek, setIsAddingWeek] = useState(false);
+    const [deleteType, setDeleteType] = useState(null);
 
     // console.log("workout program", currentWorkoutProgram)
     // console.log("Weeks", currentWorkoutProgram.weeks)
@@ -40,6 +43,7 @@ const WorkoutProgramDetailsPage = () => {
     }
 
     const handleAddWeek = async () => {
+        setIsAddingWeek(true);
         try {
             const response = await fetch(`/api/weeks/`, {
                 method: 'POST',
@@ -80,8 +84,9 @@ const WorkoutProgramDetailsPage = () => {
         }
     };
 
-    const openDeleteModal = (weekId) => {
-        setWeekToDelete(weekId);
+    const openDeleteModal = (type, id = null) => {
+        setDeleteType(type);
+        if (type === 'week') setWeekToDelete(id);
         setIsModalOpen(true);
     };
 
@@ -89,6 +94,14 @@ const WorkoutProgramDetailsPage = () => {
         setIsModalOpen(false);
         setWeekToDelete(null);
     };
+
+    const handleDeleteProgram = async () => {
+        const difficulty = currentWorkoutProgram.difficulty;
+        await dispatch(deleteWorkoutProgram(workoutProgramId))
+        await dispatch(fetchWorkoutPrograms(difficulty, 1));
+        closeModal();
+        navigate('/');
+    }
 
     const handleToggleRestDay = (weekIndex, dayIndex) => {
         const updatedWeeks = [...weeks];
@@ -102,14 +115,26 @@ const WorkoutProgramDetailsPage = () => {
         });
     };
 
+    const formattedEquipments = currentWorkoutProgram.equipments
+        .map(equipment =>
+            equipment.split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')
+        )
+        .join(', ');
+
     const isOwner = currentUser?.id === currentWorkoutProgram?.userId
 
     return (
         <div className="page-container workout-programs-details">
             <div className="information-container">
-                <h1>{currentWorkoutProgram.programName}</h1>
+                <div>
+                    <h1>{currentWorkoutProgram.programName}</h1>
+                    <button onClick={() => openDeleteModal('program')}>Delete Program</button>
+                </div>
                 <img title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName}/>
                 <p>Created By: {currentWorkoutProgram.creatorUsername}</p>
+                <p>Equipments: {formattedEquipments}</p>
                 <div className="description-container">
                     <p>Description of the program:</p>
                     <p>{currentWorkoutProgram.description}</p>
@@ -125,7 +150,7 @@ const WorkoutProgramDetailsPage = () => {
                             {isOwner && (
                                 <button
                                     type="button"
-                                    onClick={() => openDeleteModal(week.id)}
+                                    onClick={() => openDeleteModal('week', week.id)}
                                     className="remove-week-button">
                                         Remove Week
                                 </button>
@@ -158,8 +183,11 @@ const WorkoutProgramDetailsPage = () => {
             <ConfirmingModal
                 isOpen={isModalOpen}
                 onClose={closeModal}
-                onConfirm={handleDeleteWeek}
-                message="Are you sure you want to delete this week? This action cannot be undone."
+                onConfirm={deleteType === 'program' ? handleDeleteProgram : handleDeleteWeek}
+                message={deleteType === 'program'
+                    ? "Are you sure you want to delete this program? This action cannot be undone."
+                    : "Are you sure you want to delete this week? This action cannot be undone."
+                }
             />
         </div>
     )
