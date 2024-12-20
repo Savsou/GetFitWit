@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWorkoutPrograms } from '../../redux/workoutprogram';
+import { fetchWorkoutPrograms, resetCurrentWorkoutProgram } from '../../redux/workoutprogram';
 import WorkoutProgramCard from '../WorkoutsPrograms/WorkoutProgramCard'
 import './HomePage.css'
 
@@ -9,8 +9,10 @@ const HomePage = () => {
     // Get the workout programs and pagination details for each difficulty level
     const workoutPrograms = useSelector((state) => state.workoutPrograms.workoutPrograms);
     const pagination = useSelector((state) => state.workoutPrograms.pagination);
+    const isLoading = useSelector(state => state.workoutPrograms.loading);
 
     useEffect(() => {
+        dispatch(resetCurrentWorkoutProgram());
         dispatch(fetchWorkoutPrograms('beginner', 1));
         dispatch(fetchWorkoutPrograms('intermediate', 1));
         dispatch(fetchWorkoutPrograms('advanced', 1));
@@ -22,8 +24,13 @@ const HomePage = () => {
         dispatch(fetchWorkoutPrograms(difficulty, newPage));
     };
 
-    if (!workoutPrograms.beginner || !workoutPrograms.intermediate || !workoutPrograms.advanced) {
-        return <h1>Loading...</h1>;
+    if (isLoading || !workoutPrograms.beginner || !workoutPrograms.intermediate || !workoutPrograms.advanced) {
+        return (
+            <div className="loading-spinner">
+                <div className="spinner"></div>
+                <span>Loading...</span>
+            </div>
+        );
     }
 
 

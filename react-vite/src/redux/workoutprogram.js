@@ -4,6 +4,7 @@ const UPDATE_WORKOUT_PROGRAM = "workoutPrograms/updateWorkoutProgram";
 const DELETE_WORKOUT_PROGRAM = "workoutPrograms/deleteWorkoutProgram";
 const SET_WORKOUT_PROGRAM_BY_ID = "workoutPrograms/setWorkoutProgramById";
 const SET_LOADING = 'SET_LOADING';
+const RESET_CURRENT_WORKOUT_PROGRAM = "workoutPrograms/resetWorkoutProgram";
 
 const setWorkoutPrograms = (difficulty, workoutPrograms, totalPages, currentPage) => ({
     type: SET_WORKOUT_PROGRAMS,
@@ -20,6 +21,10 @@ const setWorkoutProgramById = (workoutProgram) => ({
     payload: workoutProgram,
 })
 
+const resetWorkoutProgram = () => ({
+    type: RESET_CURRENT_WORKOUT_PROGRAM
+});
+
 export const setLoading = (loading) => ({
     type: SET_LOADING,
     payload: loading
@@ -35,9 +40,10 @@ const deleteWorkoutProgramAction = (workoutProgramId) => ({
     payload: workoutProgramId,
 })
 
-const updateWorkoutProgramAction = (workoutProgram) => ({
+const updateWorkoutProgramAction = (workoutProgram, oldDifficulty) => ({
     type: UPDATE_WORKOUT_PROGRAM,
     payload: workoutProgram,
+    oldDifficulty
 })
 
 
@@ -74,6 +80,15 @@ export const fetchWorkoutProgramById = (id) => async (dispatch) => {
         dispatch(setWorkoutProgramById(data))
     } catch (e) {
         console.error("Failed to fetch workout program:", e)
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
+export const resetCurrentWorkoutProgram = () => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        dispatch(resetWorkoutProgram())
     } finally {
         dispatch(setLoading(false));
     }
@@ -126,6 +141,30 @@ export const deleteWorkoutProgram = (workoutProgramId) => async (dispatch) => {
     }
 };
 
+export const updateWorkoutProgram = (id, formData, oldDifficulty) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const response = await fetch(`/api/workout_programs/${id}`, {
+            method: 'PUT',
+            body: formData
+        });
+
+        if (response.ok) {
+            const updatedWorkoutProgram = await response.json();
+            dispatch(updateWorkoutProgramAction(updatedWorkoutProgram, oldDifficulty));
+        } else if (response.status < 500) {
+            const errorMessages = await response.json();
+            console.error("Validation Errors:", errorMessages);
+            return errorMessages;
+        }
+    } catch (e) {
+        return { server: "Something went wrong. Try again." };
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
+
 const initialState = {
     workoutPrograms: {},
     pagination: {},
@@ -158,6 +197,13 @@ const workoutProgramReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentWorkoutProgram: workoutProgram,
+            };
+        }
+
+        case RESET_CURRENT_WORKOUT_PROGRAM: {
+            return {
+                ...state,
+                currentWorkoutProgram: null
             };
         }
 
@@ -195,6 +241,28 @@ const workoutProgramReducer = (state = initialState, action) => {
                 ...state,
                 workoutPrograms: updatedWorkoutPrograms
             };
+        }
+
+        case UPDATE_WORKOUT_PROGRAM: {
+            const updatedWorkoutProgram = action.payload;
+            const difficulty = updatedWorkoutProgram.difficulty;
+            const oldDifficulty = action.oldDifficulty;
+
+            const newState = {
+                ...state,
+                workoutPrograms: {
+                    ...state.workoutPrograms,
+                    [oldDifficulty]: state.workoutPrograms[oldDifficulty].filter(
+                        program => program.id !== updatedWorkoutProgram.id
+                    ),
+                    [difficulty]: [
+                        ...state.workoutPrograms[difficulty] || [],
+                        updatedWorkoutProgram
+                    ]
+                }
+            };
+
+            return newState;
         }
 
         default:

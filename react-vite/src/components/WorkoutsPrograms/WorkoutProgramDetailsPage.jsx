@@ -20,11 +20,7 @@ const WorkoutProgramDetailsPage = () => {
     const [isAddingWeek, setIsAddingWeek] = useState(false);
     const [deleteType, setDeleteType] = useState(null);
 
-    // console.log("workout program", currentWorkoutProgram)
-    // console.log("Weeks", currentWorkoutProgram.weeks)
-
     useEffect(() => {
-        // Clear the current workout program before loading a new one
         dispatch(fetchWorkoutProgramById(workoutProgramId));
     }, [dispatch, workoutProgramId])
 
@@ -34,12 +30,23 @@ const WorkoutProgramDetailsPage = () => {
         }
     }, [currentWorkoutProgram?.weeks]);
 
+
     if (isLoading) {
-        return <div>Loading...</div>
+        return (
+            <div className="loading-spinner">
+                <div className="spinner"></div>
+                <span>Loading...</span>
+            </div>
+        );
     }
 
     if (!currentWorkoutProgram) {
-        return <div>No Workout Program Found.</div>
+        return (
+            <div className="loading-spinner">
+                <div className="spinner"></div>
+                <span>Loading...</span>
+            </div>
+        );
     }
 
     const handleAddWeek = async () => {
@@ -130,7 +137,14 @@ const WorkoutProgramDetailsPage = () => {
             <div className="information-container">
                 <div>
                     <h1>{currentWorkoutProgram.programName}</h1>
-                    <button onClick={() => openDeleteModal('program')}>Delete Program</button>
+                    {isOwner && (
+                        <button
+                            onClick={() => navigate(`/workout_programs/${workoutProgramId}/edit`)}
+                            className="edit-program-button"
+                        >
+                            Edit Program
+                        </button>
+                    )}
                 </div>
                 <img title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName}/>
                 <p>Created By: {currentWorkoutProgram.creatorUsername}</p>
@@ -139,6 +153,9 @@ const WorkoutProgramDetailsPage = () => {
                     <p>Description of the program:</p>
                     <p>{currentWorkoutProgram.description}</p>
                 </div>
+                {isOwner && (
+                    <button onClick={() => openDeleteModal('program')}>Delete Program</button>
+                )}
             </div>
 
             <div className="weeks-container">

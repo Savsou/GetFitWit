@@ -107,3 +107,14 @@
 .cancel-button:hover {
     background: #c82333;
 }
+
+.add-workout-program-form .input-group textarea {
+    width: 100%;
+    height: 300px;
+    max-height: 300px;
+    overflow: auto;
+    resize: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

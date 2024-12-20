@@ -25,17 +25,15 @@ const WorkoutProgramCard = ({program}) => {
         .join(', ');
 
     return (
-        <div className='workout-card'>
-            <Link to={`/workout_programs/${program.id}`}>
-                <img src={program.workoutImageUrl} alt={program.programName} />
-                <div className='workout-information'>
-                    <h3>{program.programName}</h3>
-                    <p>Difficulty: {formattedDifficulty}</p>
-                    <p>Type: {formattedTypes}</p>
-                    <p>Equipments: {formattedEquipments}</p>
-                </div>
-            </Link>
-        </div>
+        <Link to={`/workout_programs/${program.id}`} className='workout-card'>
+            <img src={program.workoutImageUrl} alt={program.programName} />
+            <div className='workout-information'>
+                <h3>{program.programName}</h3>
+                <p>Difficulty: {formattedDifficulty}</p>
+                <p>Type: {formattedTypes}</p>
+                <p>Equipments: {formattedEquipments}</p>
+            </div>
+        </Link>
     )
 }
 
