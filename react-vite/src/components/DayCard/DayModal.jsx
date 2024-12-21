@@ -15,9 +15,9 @@ const DayModal = ({ day, onClose, isOwner, weekIndex, dayIndex, onToggleRestDay 
 
     return (
         <div className="modal">
-            <h2>Edit {day.name}</h2>
+            <h2>{day.name}</h2>
             <div>
-                <p>
+                <div>
                     <strong>Rest Day:</strong>
                     {/* Toggle Switch */}
                     <label className="switch">
@@ -29,13 +29,11 @@ const DayModal = ({ day, onClose, isOwner, weekIndex, dayIndex, onToggleRestDay 
                         <span className="slider"></span>
                     </label>
                     <span>{isRestDay ? "Rest Day" : "Workout Day"}</span>
-                </p>
-            </div>
-            {isOwner && (
-                <div>
-                    <button onClick={onClose}>Close</button>
                 </div>
-            )}
+            </div>
+            <div>
+                <button onClick={onClose}>Close</button>
+            </div>
         </div>
     );
 };

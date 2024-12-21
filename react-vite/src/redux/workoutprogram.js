@@ -113,8 +113,11 @@ export const addWorkoutProgram = (formData) => async (dispatch) => {
         }
 
     } catch (e) {
-        return { server: "Something went wrong. Try again."}
+        return { server: "Something went wrong. Try again." }
     } finally {
+        dispatch(fetchWorkoutPrograms('beginner', 1));
+        dispatch(fetchWorkoutPrograms('intermediate', 1));
+        dispatch(fetchWorkoutPrograms('advanced', 1));
         dispatch(setLoading(false));
     }
 };

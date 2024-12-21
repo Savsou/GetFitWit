@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorkoutPrograms, resetCurrentWorkoutProgram } from '../../redux/workoutprogram';
 import WorkoutProgramCard from '../WorkoutsPrograms/WorkoutProgramCard'
@@ -9,13 +9,21 @@ const HomePage = () => {
     // Get the workout programs and pagination details for each difficulty level
     const workoutPrograms = useSelector((state) => state.workoutPrograms.workoutPrograms);
     const pagination = useSelector((state) => state.workoutPrograms.pagination);
-    const isLoading = useSelector(state => state.workoutPrograms.loading);
+    const [localLoading, setLocalLoading] = useState(true);
 
+    //When switching back to the homepage, make sure it loads everything before showing the page and reset the current Workout Program state
     useEffect(() => {
-        dispatch(resetCurrentWorkoutProgram());
-        dispatch(fetchWorkoutPrograms('beginner', 1));
-        dispatch(fetchWorkoutPrograms('intermediate', 1));
-        dispatch(fetchWorkoutPrograms('advanced', 1));
+        const fetchData = async () => {
+            dispatch(resetCurrentWorkoutProgram());
+            await Promise.all([
+                dispatch(fetchWorkoutPrograms('beginner', 1)),
+                dispatch(fetchWorkoutPrograms('intermediate', 1)),
+                dispatch(fetchWorkoutPrograms('advanced', 1)),
+            ]);
+            setLocalLoading(false);
+        };
+
+        fetchData();
     }, [dispatch]);
 
     const handlePagination = (difficulty, direction) => {
@@ -24,7 +32,7 @@ const HomePage = () => {
         dispatch(fetchWorkoutPrograms(difficulty, newPage));
     };
 
-    if (isLoading || !workoutPrograms.beginner || !workoutPrograms.intermediate || !workoutPrograms.advanced) {
+    if (localLoading || !workoutPrograms.beginner || !workoutPrograms.intermediate || !workoutPrograms.advanced) {
         return (
             <div className="loading-spinner">
                 <div className="spinner"></div>
