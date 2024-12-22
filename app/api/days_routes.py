@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import Day, db, User
+from app.models import Day, db
 
 days_routes = Blueprint('days', __name__)
 

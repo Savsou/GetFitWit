@@ -146,7 +146,7 @@ const WorkoutProgramDetailsPage = () => {
                         </button>
                     )}
                 </div>
-                <img title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName}/>
+                <img title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName} />
                 <p>Created By: {currentWorkoutProgram.creatorUsername}</p>
                 <p>Equipments: {formattedEquipments}</p>
                 <div className="description-container">
@@ -169,7 +169,7 @@ const WorkoutProgramDetailsPage = () => {
                                     type="button"
                                     onClick={() => openDeleteModal('week', week.id)}
                                     className="remove-week-button">
-                                        Remove Week
+                                    Remove Week
                                 </button>
                             )}
                         </div>
@@ -183,7 +183,7 @@ const WorkoutProgramDetailsPage = () => {
                                     weekIndex={weekIndex}
                                     dayIndex={dayIndex}
                                     onToggleRestDay={() => handleToggleRestDay(weekIndex, dayIndex)}
-                                    />
+                                />
                             ))}
                         </div>
                     </div>

@@ -5,6 +5,8 @@ const DELETE_WORKOUT_PROGRAM = "workoutPrograms/deleteWorkoutProgram";
 const SET_WORKOUT_PROGRAM_BY_ID = "workoutPrograms/setWorkoutProgramById";
 const SET_LOADING = 'SET_LOADING';
 const RESET_CURRENT_WORKOUT_PROGRAM = "workoutPrograms/resetWorkoutProgram";
+const UPDATE_WORKOUT = "workoutPrograms/updateWorkoutsForDay";
+
 
 const setWorkoutPrograms = (difficulty, workoutPrograms, totalPages, currentPage) => ({
     type: SET_WORKOUT_PROGRAMS,
@@ -45,6 +47,12 @@ const updateWorkoutProgramAction = (workoutProgram, oldDifficulty) => ({
     payload: workoutProgram,
     oldDifficulty
 })
+
+const updateWorkoutAction = (updatedWorkout) => ({
+    type: UPDATE_WORKOUT,
+    payload: updatedWorkout
+});
+
 
 
 export const fetchWorkoutPrograms = (difficulty, page) => async (dispatch) => {
@@ -167,6 +175,39 @@ export const updateWorkoutProgram = (id, formData, oldDifficulty) => async (disp
     }
 };
 
+export const updateWorkout = (workout, workoutProgramId) => async (dispatch) => {
+    const { workout_type, exercise, sets, reps, minutes, seconds, weight } = workout;
+
+    const sanitizedWorkout = { workout_type, exercise, sets, reps, minutes, seconds, weight };
+
+    console.log("Updating workout with ID:", workout.id);
+    console.log("workout: ", workout)
+    console.log("Sanitized: ", sanitizedWorkout)
+    dispatch(setLoading(true));
+    try {
+        const response = await fetch(`/api/workouts/${workout.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sanitizedWorkout),
+        });
+
+        console.log("here is the response: ", response)
+
+        if (response.ok) {
+            const updatedWorkout = await response.json();
+            console.log('Workout updated:', updatedWorkout);
+            dispatch(updateWorkoutAction(updatedWorkout));
+        }
+    } catch (error) {
+        console.error('Failed to update workout:', error);
+        return { server: "Something went wrong. Try again." };
+    } finally {
+        dispatch(fetchWorkoutProgramById(workoutProgramId))
+        dispatch(setLoading(false));
+    }
+};
 
 const initialState = {
     workoutPrograms: {},
@@ -266,6 +307,11 @@ const workoutProgramReducer = (state = initialState, action) => {
             };
 
             return newState;
+        }
+
+        case UPDATE_WORKOUT: {
+            //fetchWorkoutProgramId will return the state for us
+            return state;
         }
 
         default:

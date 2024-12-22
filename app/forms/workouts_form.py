@@ -24,7 +24,6 @@ class WorkoutsForm(FlaskForm):
             raise ValidationError('Weight cannot be less than 0.')
 
     workout_type = SelectField('Workout Type', choices=[('sets_reps', 'Sets/Reps'), ('duration', 'Duration')], validators=[DataRequired()])
-    dayId = IntegerField('Day ID', validators=[DataRequired()])
     exercise = StringField('Exercise', validators=[DataRequired()])
     sets = IntegerField('Sets', validators=[validate_sets], default=0)
     reps = IntegerField('Reps', validators=[validate_reps], default=0)

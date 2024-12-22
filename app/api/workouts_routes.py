@@ -117,7 +117,6 @@ def update_workout(workout_id):
             return jsonify({'message': 'You do not have permission to update this workout.'}), 403
 
         workout.workout_type = form.workout_type.data
-        workout.dayId = form.dayId.data
         workout.exercise = form.exercise.data
         workout.sets = form.sets.data or 0
         workout.reps = form.reps.data or 0
@@ -129,4 +128,4 @@ def update_workout(workout_id):
         return jsonify(workout.to_dict()), 200
 
     if form.errors:
-        return form.errors, 400
+        return jsonify({"errors": form.errors}), 400
