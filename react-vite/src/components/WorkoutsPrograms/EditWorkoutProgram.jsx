@@ -113,10 +113,10 @@ const EditWorkoutProgram = () => {
     };
 
     const handleCancel = () => {
-        navigate('/');
+        navigate(-1);
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -230,7 +230,7 @@ const EditWorkoutProgram = () => {
                                     src={previewImage}
                                     alt="Workout Preview"
                                     style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
-                                    />
+                                />
                                 <button onClick={handleClearFile}>Remove</button>
                             </div>
                         )}
@@ -239,15 +239,15 @@ const EditWorkoutProgram = () => {
 
                     <div className="submission-buttons">
                         <button
-                        type="submit"
-                        className="submit-button">
+                            type="submit"
+                            className="submit-button">
                             Update
                         </button>
                         <button
                             type="button"
                             className="cancel-button"
                             onClick={handleCancel}>
-                                Cancel
+                            Cancel
                         </button>
                     </div>
                 </div>

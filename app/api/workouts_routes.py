@@ -118,11 +118,11 @@ def update_workout(workout_id):
 
         workout.workout_type = form.workout_type.data
         workout.exercise = form.exercise.data
-        workout.sets = form.sets.data or 0
-        workout.reps = form.reps.data or 0
-        workout.minutes = form.minutes.data or 0
-        workout.seconds = form.seconds.data or 0
-        workout.weight = form.weight.data or 0
+        workout.sets = form.sets.data if form.sets.data is not None else 0
+        workout.reps = form.reps.data if form.reps.data is not None else 0
+        workout.minutes = form.minutes.data if form.minutes.data is not None else 0
+        workout.seconds = form.seconds.data if form.seconds.data is not None else 0
+        workout.weight = form.weight.data if form.weight.data is not None else 0
 
         db.session.commit()
         return jsonify(workout.to_dict()), 200

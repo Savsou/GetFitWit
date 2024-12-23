@@ -76,6 +76,17 @@ li {
   margin: 1rem 0;
 }
 
+.day-modal-workouts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 15px;
+  margin: 5px 0;
+  text-align: left;
+  gap: 100px;
+}
+
 .edit-workout-button-container {
   display: flex;
   justify-content: flex-end;

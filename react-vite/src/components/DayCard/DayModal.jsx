@@ -3,7 +3,7 @@ import { useModal } from '../../context/Modal';
 import EditWorkoutModal from '../EditWorkoutModal/EditWorkoutModal';
 import './DayModal.css';
 
-const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay, workoutProgramId }) => {
+const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
     const { setModalContent, closeModal } = useModal();
     const [isRestDay, setIsRestDay] = useState(day.restDay);
     const [workouts, setWorkouts] = useState(day.workouts);
@@ -29,7 +29,7 @@ const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay, workoutP
         );
     };
 
-    const handleSaveWorkouts = (updatedWorkouts) => {
+    const handleSaveWorkouts = async (updatedWorkouts) => {
         setWorkouts(updatedWorkouts);
         closeModal();
         setModalContent(
@@ -70,8 +70,8 @@ const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay, workoutP
                     </div>
                 )}
                 {workouts.length > 0 ? (
-                    workouts.map((workout) => (
-                        <div key={workout.id} className="workout">
+                    workouts.map((workout, index) => (
+                        <div key={workout.id || index} className="day-modal-workouts">
                             <div className="workout-info">
                                 {/* Display sets/reps or duration */}
                                 {workout.workout_type === 'sets_reps' && (

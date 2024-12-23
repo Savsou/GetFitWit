@@ -6,6 +6,8 @@ const SET_WORKOUT_PROGRAM_BY_ID = "workoutPrograms/setWorkoutProgramById";
 const SET_LOADING = 'SET_LOADING';
 const RESET_CURRENT_WORKOUT_PROGRAM = "workoutPrograms/resetWorkoutProgram";
 const UPDATE_WORKOUT = "workoutPrograms/updateWorkoutsForDay";
+const DELETE_WORKOUT = "workout/deleteWorkout";
+const ADD_WORKOUT = "workout/addWorkout";
 
 
 const setWorkoutPrograms = (difficulty, workoutPrograms, totalPages, currentPage) => ({
@@ -53,6 +55,15 @@ const updateWorkoutAction = (updatedWorkout) => ({
     payload: updatedWorkout
 });
 
+const deleteWorkoutAction = (workoutId) => ({
+    type: DELETE_WORKOUT,
+    payload: workoutId,
+})
+
+const addWorkoutAction = (newWorkout) => ({
+    type: ADD_WORKOUT,
+    payload: newWorkout,
+});
 
 
 export const fetchWorkoutPrograms = (difficulty, page) => async (dispatch) => {
@@ -175,39 +186,82 @@ export const updateWorkoutProgram = (id, formData, oldDifficulty) => async (disp
     }
 };
 
-export const updateWorkout = (workout, workoutProgramId) => async (dispatch) => {
+export const updateWorkout = (workout) => async (dispatch) => {
     const { workout_type, exercise, sets, reps, minutes, seconds, weight } = workout;
 
-    const sanitizedWorkout = { workout_type, exercise, sets, reps, minutes, seconds, weight };
+    const filterWorkout = { workout_type, exercise, sets, reps, minutes, seconds, weight };
 
-    console.log("Updating workout with ID:", workout.id);
-    console.log("workout: ", workout)
-    console.log("Sanitized: ", sanitizedWorkout)
-    dispatch(setLoading(true));
     try {
         const response = await fetch(`/api/workouts/${workout.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(sanitizedWorkout),
+            body: JSON.stringify(filterWorkout),
         });
-
-        console.log("here is the response: ", response)
 
         if (response.ok) {
             const updatedWorkout = await response.json();
-            console.log('Workout updated:', updatedWorkout);
             dispatch(updateWorkoutAction(updatedWorkout));
+            return updatedWorkout;
+        } else {
+            const errors = await response.json();
+            return errors;
         }
     } catch (error) {
         console.error('Failed to update workout:', error);
         return { server: "Something went wrong. Try again." };
+    }
+};
+
+export const deleteWorkout = (workoutId) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const response = await fetch(`/api/workouts/${workoutId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            dispatch(deleteWorkoutAction(workoutId));
+        } else {
+            const errorMessages = await response.json();
+            console.error("Failed to delete workout:", errorMessages);
+        }
+    } catch (error) {
+        console.error("Error deleting workout:", error);
     } finally {
-        dispatch(fetchWorkoutProgramById(workoutProgramId))
         dispatch(setLoading(false));
     }
 };
+
+export const addWorkout = (workout) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        const response = await fetch('/api/workouts/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(workout),
+        });
+
+        if (response.ok) {
+            const newWorkout = await response.json();
+            dispatch(addWorkoutAction(newWorkout));
+            return newWorkout
+        } else if (response.status < 500) {
+            const errorMessages = await response.json();
+            console.error("Validation Errorssssss:", errorMessages);
+            return errorMessages;
+        }
+    } catch (error) {
+        console.error("Something went wrong. Try again.", error);
+        return { server: "Something went wrong. Try again." };
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
 
 const initialState = {
     workoutPrograms: {},
@@ -313,6 +367,77 @@ const workoutProgramReducer = (state = initialState, action) => {
             //fetchWorkoutProgramId will return the state for us
             return state;
         }
+
+        case DELETE_WORKOUT: {
+            const workoutId = action.payload;
+
+            // Check if currentWorkoutProgram and nested weeks, days, workouts exist
+            if (state.currentWorkoutProgram && state.currentWorkoutProgram.weeks) {
+                // Iterate over each week, then each day, and filter out the workout by its ID
+                const updatedWeeks = state.currentWorkoutProgram.weeks.map(week => {
+                    const updatedDays = week.days.map(day => {
+                        const updatedWorkouts = day.workouts.filter(workout => workout.id !== workoutId);
+
+                        // Return the updated day with filtered workouts
+                        return {
+                            ...day,
+                            workouts: updatedWorkouts
+                        };
+                    });
+
+                    // Return the updated week with updated days
+                    return {
+                        ...week,
+                        days: updatedDays
+                    };
+                });
+
+                // Return the new state with the updated weeks and workouts
+                return {
+                    ...state,
+                    currentWorkoutProgram: {
+                        ...state.currentWorkoutProgram,
+                        weeks: updatedWeeks
+                    }
+                };
+            }
+
+            return state;  // Return state as is if no workouts or current workout program
+        }
+
+        case ADD_WORKOUT: {
+            const newWorkout = action.payload;
+            if (state.currentWorkoutProgram && state.currentWorkoutProgram.weeks) {
+                const updatedWeeks = state.currentWorkoutProgram.weeks.map(week => {
+                    const updatedDays = week.days.map(day => {
+
+                        if (day.id === newWorkout.dayId) {
+                            return {
+                                ...day,
+                                workouts: [...day.workouts, newWorkout]
+                            };
+                        }
+                        return day;
+                    });
+
+                    return {
+                        ...week,
+                        days: updatedDays
+                    };
+                });
+
+                return {
+                    ...state,
+                    currentWorkoutProgram: {
+                        ...state.currentWorkoutProgram,
+                        weeks: updatedWeeks
+                    }
+                };
+            }
+
+            return state;
+        }
+
 
         default:
             return state;
