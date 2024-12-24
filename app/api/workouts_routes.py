@@ -65,7 +65,7 @@ def create_workout():
         return jsonify(new_workout.to_dict()), 201
 
     if form.errors:
-        return form.errors, 400
+        return jsonify(errors=form.errors), 400
 
 
 #Delete A Workout

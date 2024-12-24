@@ -98,22 +98,34 @@ const EditWorkoutModal = ({ workouts, day, onClose, onSave }) => {
 
         const response = await dispatch(addWorkout(updatedWorkout));
 
-        // console.log("RESPONSE: ", response)
+        // Initialize an empty errors object for this workout
+        let workoutErrors = {};
 
+        if (response?.errors) {
+            // Loop through the errors and add only the specific field errors
+            Object.keys(response.errors).forEach((errorField) => {
+                // Add the error only for the current workout and error field
+                if (!workoutErrors[errorField]) {
+                    workoutErrors[errorField] = response.errors[errorField][0];
+                }
+            });
+
+            // Return the specific errors for this workout
+            return { errors: workoutErrors };
+        }
+
+        // If the response contains a valid ID, add it to the workouts list
         if (response?.id) {
-            // Add the new workout with the correct ID
             const updatedWorkouts = [...editedWorkouts, response];
             setEditedWorkouts(updatedWorkouts);
         }
-
-        // Optionally, fetch updated workout program and save
-        // dispatch(fetchWorkoutProgramById(workoutProgramId));
-        // onSave(updatedWorkouts);
     };
 
     return (
         <div className="edit-workout-modal">
-            <h3>Edit Workouts for {day.name}</h3>
+            <div className='workout-heading'>
+                <h2>Edit Workouts for {day.name}</h2>
+            </div>
 
             <form onSubmit={handleSave}>
                 <div className="workouts-list">

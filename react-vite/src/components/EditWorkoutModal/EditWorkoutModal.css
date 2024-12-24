@@ -10,6 +10,8 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    max-height: 80%;
+    overflow-y: auto;
 }
 
 .workouts-list>.workout {
@@ -64,7 +66,44 @@
     color: white;
 }
 
+.workout-actions button[type="submit"]:hover {
+    background-color: #3a883d;
+}
+
 .workout-actions button[type="button"] {
     background-color: #f44336;
     color: white;
+}
+
+.workout-actions button[type="button"]:hover {
+    background-color: #c2342a;
+}
+
+.workout-heading {
+    display: flex;
+    justify-content: center;
+}
+
+.add-workout-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-workout-button-container button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-workout-button-container button:hover {
+    background-color: #3a883d;
+}
+
+.add-workout-error-message {
+    color: red;
+    font-size: 14px;
 }
