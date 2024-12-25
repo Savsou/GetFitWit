@@ -18,7 +18,7 @@ def get_session_user_favorites():
 
         if favorite_program:
             result.append({
-                "workoutProgramId": program.id,
+                "id": program.id,
                 "programName": program.programName,
                 "userId": program.userId,
                 "creatorUsername": program.user.username,
@@ -26,6 +26,7 @@ def get_session_user_favorites():
                 "difficulty": program.difficulty,
                 "equipments": program.equipments,
                 "types": program.types,
+                "workoutImageUrl": program.workoutImageUrl
             })
 
     return {'favorites': result}, 200
@@ -55,9 +56,15 @@ def add_to_favorites():
 
             for program in favorite["workoutPrograms"]:
                 dict_program = {
-                    "workoutProgramId": program["id"],
+                    "id": program["id"],
                     "programName": program["programName"],
-                    "userId": program["userId"]
+                    "userId": program["userId"],
+                    "creatorUsername": program["creatorUsername"],
+                    "description": program["description"],
+                    "difficulty": program["difficulty"],
+                    "equipments": program["equipments"],
+                    "types": program["types"],
+                    "workoutImageUrl": program["workoutImageUrl"]
                 }
                 result.append(dict_program)
 

@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorkoutPrograms, resetCurrentWorkoutProgram } from '../../redux/workoutprogram';
+import { fetchFavorites, loadFavorites } from '../../redux/favorites';
 import WorkoutProgramCard from '../WorkoutsPrograms/WorkoutProgramCard'
 import './HomePage.css'
 
 const HomePage = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user)
+    const favorites = useSelector((state) => state.favorites)
     // Get the workout programs and pagination details for each difficulty level
     const workoutPrograms = useSelector((state) => state.workoutPrograms.workoutPrograms);
     const pagination = useSelector((state) => state.workoutPrograms.pagination);
@@ -25,6 +28,14 @@ const HomePage = () => {
 
         fetchData();
     }, [dispatch]);
+
+    useEffect(() => {
+        if (user !== null) {
+            dispatch(fetchFavorites());
+        } else {
+            dispatch(loadFavorites([]));
+        }
+    }, [dispatch, user]);
 
     const handlePagination = (difficulty, direction) => {
         const currentPage = pagination[difficulty]?.currentPage || 1;
@@ -52,7 +63,7 @@ const HomePage = () => {
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
                         {workoutPrograms.beginner.map((program) => (
-                            <WorkoutProgramCard key={program.id} program={program} />
+                            <WorkoutProgramCard key={program.id} program={program} favorites={favorites} />
                         ))}
                     </div>
                 </ul>
@@ -76,7 +87,7 @@ const HomePage = () => {
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
                         {workoutPrograms.intermediate.map((program) => (
-                            <WorkoutProgramCard key={program.id} program={program} />
+                            <WorkoutProgramCard key={program.id} program={program} favorites={favorites} />
                         ))}
                     </div>
                 </ul>
@@ -103,7 +114,7 @@ const HomePage = () => {
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
                         {workoutPrograms.advanced.map((program) => (
-                            <WorkoutProgramCard key={program.id} program={program} />
+                            <WorkoutProgramCard key={program.id} program={program} favorites={favorites} />
                         ))}
                     </div>
                 </ul>

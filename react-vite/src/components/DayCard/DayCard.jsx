@@ -21,7 +21,7 @@ const DayCard = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
     const limitedWorkouts = day.workouts.slice(0, 3);
 
     return (
-        <div className="day-card" onClick={handleCardClick}>
+        <div className={`day-card ${day.restDay ? "rest-day-card" : ""}`} onClick={handleCardClick}>
             <h2>{day.name}</h2>
             <p className='rest-day-status'>{day.restDay ? "Rest Day" : "Workout Day"}</p>
 

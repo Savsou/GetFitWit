@@ -97,6 +97,7 @@ export const fetchWorkoutProgramById = (id) => async (dispatch) => {
 
         const data = await response.json();
         dispatch(setWorkoutProgramById(data))
+        return data
     } catch (e) {
         console.error("Failed to fetch workout program:", e)
     } finally {

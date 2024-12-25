@@ -12,7 +12,7 @@
     text-align: center;
     width: 100%;
     max-width: 450px;
-    height: 400px;
+    height: 450px;
 }
 
 .day-card:hover {
@@ -41,6 +41,8 @@
 .workouts {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .workout {
@@ -102,4 +104,8 @@
     cursor: pointer;
     text-decoration: underline;
     font-weight: bold;
+}
+
+.rest-day-card {
+    background-color: rgba(112, 13, 13, 0.26);
 }
