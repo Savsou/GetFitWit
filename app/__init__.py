@@ -11,6 +11,7 @@ from .api.workout_program_routes import workout_program_routes
 from .api.weeks_routes import weeks_routes
 from .api.days_routes import days_routes
 from .api.workouts_routes import workouts_routes
+from .api.favorites_routes import favorites_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +37,7 @@ app.register_blueprint(workout_program_routes, url_prefix='/api/workout_programs
 app.register_blueprint(weeks_routes, url_prefix='/api/weeks')
 app.register_blueprint(days_routes, url_prefix='/api/days')
 app.register_blueprint(workouts_routes, url_prefix='/api/workouts')
+app.register_blueprint(favorites_routes, url_prefix='/api/favorites')
 db.init_app(app)
 Migrate(app, db)
 
