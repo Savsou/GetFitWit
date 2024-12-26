@@ -52,7 +52,6 @@ const EditWorkoutProgram = () => {
     ];
 
     useEffect(() => {
-        // Clear the current workout program before loading a new one
         dispatch(fetchWorkoutProgramById(workoutProgramId));
     }, [dispatch, workoutProgramId])
 

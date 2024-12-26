@@ -1,6 +1,5 @@
 from datetime import datetime
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-# from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy import JSON
 
 

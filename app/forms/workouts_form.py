@@ -6,28 +6,28 @@ class WorkoutsForm(FlaskForm):
     def validate_sets(form, field):
         if form.workout_type.data == 'sets_reps':
             if field.data is None or field.data == '':
-                field.data = 0  # Set sets to 0 if empty
+                field.data = 0
             if field.data <= 0:
                 raise ValidationError('Sets are required for sets/reps workout and cannot be less than 1.')
 
     def validate_reps(form, field):
         if form.workout_type.data == 'sets_reps':
             if field.data is None or field.data == '':
-                field.data = 0  # Set sets to 0 if empty
+                field.data = 0
             if field.data <= 0:
                 raise ValidationError('Reps are required for sets/reps workout and cannot be less than 0.')
 
     def validate_minutes(form, field):
         if form.workout_type.data == 'duration':
             if field.data is None or field.data == '':
-                field.data = 0  # Set sets to 0 if empty
+                field.data = 0
             if field.data < 0:
                 raise ValidationError('Duration is required for duration workout and cannot be less than 0.')
 
     def validate_seconds(form, field):
         if form.workout_type.data == 'duration':
             if field.data is None or field.data == '':
-                field.data = 0  # Set sets to 0 if empty
+                field.data = 0
             if field.data < 0:
                 raise ValidationError('Duration is required for duration workout and cannot be less than 0.')
 

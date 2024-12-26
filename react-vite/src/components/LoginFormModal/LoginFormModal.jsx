@@ -51,7 +51,7 @@ function LoginFormModal() {
     }
   };
 
-  const demoUserLogin = async(e) => {
+  const demoUserLogin = async (e) => {
     e.preventDefault();
 
     setErrors({});
