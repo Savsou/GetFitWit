@@ -1,0 +1,120 @@
+.add-workout-program-form {
+    display: flex;
+    justify-content: center;
+}
+
+.create-workout-program-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.workout-form-header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.input-group input[type="text"],
+.input-group select,
+.input-group textarea,
+.input-group button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+}
+
+.input-group label input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.input-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-group h3 {
+    margin-bottom: 10px;
+}
+
+.input-group img {
+    display: block;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.submission-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-button,
+.cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button {
+    background: #28a745;
+    color: white;
+}
+
+.submit-button:hover {
+    background: #218838;
+}
+
+.cancel-button {
+    background: #dc3545;
+    color: white;
+}
+
+.cancel-button:hover {
+    background: #c82333;
+}
+
+.add-workout-program-form .input-group textarea {
+    width: 100%;
+    height: 300px;
+    max-height: 300px;
+    overflow: auto;
+    resize: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

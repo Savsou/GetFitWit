@@ -1,0 +1,59 @@
+.profile-favorite {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.favorite-star {
+    height: 33px;
+    font-size: 23px;
+    color: black;
+}
+
+.favorite-star:visited {
+    color: inhert;
+}
+
+.profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    color: black;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    list-style: none;
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.profile-dropdown li {
+    padding: 10px;
+    color: #333;
+}
+
+.profile-dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-dropdown button {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+}
+
+.profile-dropdown button:hover {
+    color: #d00;
+}

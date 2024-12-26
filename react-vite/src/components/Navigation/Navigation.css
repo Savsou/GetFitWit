@@ -1,9 +1,81 @@
-.profile-dropdown {
-  position: absolute;
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top, rgb(255, 115, 0), rgb(255, 231, 17));
+  padding: 0;
+  height: 70px;
+  width: 100%;
+  overflow: hidden;
 }
 
-nav {
-  background-color: rgb(198, 0, 49);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 75%;
+  height: 100%;
+  gap: 2rem;
+}
+
+.logo {
+  margin-top: -10px;
+  max-height: 100%;
+  height: 90px;
+  width: auto;
+}
+
+.nav-logo {
+  margin-right: auto;
+}
+
+.nav-list > li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-button, .signup-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 35px;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.login-button:hover, .signup-button:hover {
+  background-color: rgb(255, 161, 20);
+}
+
+.user-right {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.create-program-link {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  color: black  ;
+}
+
+.create-program-link:visited {
+  color: inherit;
 }
