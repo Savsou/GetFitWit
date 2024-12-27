@@ -16,12 +16,12 @@ export default function Layout() {
     <>
       <ModalProvider>
         <Navigation />
-        {!isLoaded && (
+        {/* {!isLoaded && (
           <div className="loading-spinner-container">
             <div className="spinner"></div>
             <span>Loading...</span>
           </div>
-        )}
+        )} */}
         {isLoaded && <Outlet />}
         <Modal />
       </ModalProvider>

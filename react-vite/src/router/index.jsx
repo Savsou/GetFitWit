@@ -1,12 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
 import FavoritesPage from '../components/FavoritesPage';
 import WorkoutProgramDetailsPage from '../components/WorkoutsPrograms';
 import CreateWorkoutProgram from '../components/WorkoutsPrograms/CreateWorkoutProgram';
 import EditWorkoutProgram from '../components/WorkoutsPrograms/EditWorkoutProgram';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
+import UserProfilePage from '../components/UserProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -16,14 +15,6 @@ export const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
-      // {
-      //   path: "login",
-      //   element: <LoginFormPage />,
-      // },
-      // {
-      //   path: "signup",
-      //   element: <SignupFormPage />,
-      // },
       {
         path: "favorites",
         element: <FavoritesPage />,
@@ -40,6 +31,10 @@ export const router = createBrowserRouter([
         path: "workout_programs/:workoutProgramId/edit",
         element: <EditWorkoutProgram />
       },
+      {
+        path: "profile/:userId",
+        element: <UserProfilePage />
+      }
     ],
   },
 ]);

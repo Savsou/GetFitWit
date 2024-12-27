@@ -46,11 +46,16 @@ function ProfileButton() {
     navigate('/')
   };
 
+  const handleViewProfile = () => {
+    closeMenu();
+    navigate(`/profile/${user.id}`);
+  };
+
   return (
     <>
       <div className="profile-favorite">
         <NavLink className="favorite-star" to="/favorites">
-          <FontAwesomeIcon icon={faRegularStar}/>
+          <FontAwesomeIcon icon={faRegularStar} />
         </NavLink>
         <button onClick={toggleMenu} className="profile-button">
           <FaUserCircle />
@@ -60,9 +65,13 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
+              <li className="user-greeting">Hey, {user.username}</li>
+              <li className="profile-dropdown-item">
+                <button onClick={handleViewProfile}>
+                  View Profile
+                </button>
+              </li>
+              <li className="profile-dropdown-item">
                 <button onClick={logout}>Log Out</button>
               </li>
             </>

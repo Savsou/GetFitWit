@@ -10,6 +10,7 @@ def seed_users():
             'email': 'demoman@example.com',
             'password': 'hashedpassword1',
             'bio': 'Hello, I am Demoman!',
+            'profileImageUrl': 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455083/cld-sample-5.jpg',
         },
         {
             'username': 'Demo',

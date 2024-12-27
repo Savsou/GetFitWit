@@ -25,7 +25,6 @@
 .profile-dropdown {
     position: absolute;
     top: 5%;
-    right: 2%;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -36,8 +35,11 @@
     min-width: 200px;
 }
 
-.profile-dropdown li {
+.user-greeting {
     padding: 10px;
+}
+
+.profile-dropdown li {
     color: #333;
 }
 
@@ -47,11 +49,13 @@
 
 .profile-dropdown button {
     background: none;
+    width: 100%;
     border: none;
     color: #333;
     cursor: pointer;
     font-size: 16px;
-    padding: 0;
+    padding: 10px;
+    text-align: left;
 }
 
 .profile-dropdown button:hover {
