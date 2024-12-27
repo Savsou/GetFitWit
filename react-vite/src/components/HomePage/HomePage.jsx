@@ -67,18 +67,20 @@ const HomePage = () => {
                         ))}
                     </div>
                 </ul>
-                <button
-                    onClick={() => handlePagination('beginner', 'prev')}
-                    disabled={pagination.beginner?.currentPage === 1}
-                >
-                    Prev
-                </button>
-                <button
-                    onClick={() => handlePagination('beginner', 'next')}
-                    disabled={pagination.beginner?.currentPage === pagination.beginner?.totalPages}
-                >
-                    Next
-                </button>
+                <div className='pagination-container'>
+                    <button
+                        onClick={() => handlePagination('beginner', 'prev')}
+                        disabled={pagination.beginner?.currentPage === 1}
+                    >
+                        Prev
+                    </button>
+                    <button
+                        onClick={() => handlePagination('beginner', 'next')}
+                        disabled={pagination.beginner?.currentPage === pagination.beginner?.totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
             {/* Intermediate Programs */}
@@ -91,21 +93,23 @@ const HomePage = () => {
                         ))}
                     </div>
                 </ul>
-                <button
-                    onClick={() => handlePagination('intermediate', 'prev')}
-                    disabled={pagination.intermediate?.currentPage === 1}
-                >
-                    Prev
-                </button>
-                <button
-                    onClick={() => handlePagination('intermediate', 'next')}
-                    disabled={
-                        pagination.intermediate?.currentPage ===
-                        pagination.intermediate?.totalPages
-                    }
-                >
-                    Next
-                </button>
+                <div className='pagination-container'>
+                    <button
+                        onClick={() => handlePagination('intermediate', 'prev')}
+                        disabled={pagination.intermediate?.currentPage === 1}
+                    >
+                        Prev
+                    </button>
+                    <button
+                        onClick={() => handlePagination('intermediate', 'next')}
+                        disabled={
+                            pagination.intermediate?.currentPage ===
+                            pagination.intermediate?.totalPages
+                        }
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
             {/* Advanced Programs */}
@@ -118,18 +122,20 @@ const HomePage = () => {
                         ))}
                     </div>
                 </ul>
-                <button
-                    onClick={() => handlePagination('advanced', 'prev')}
-                    disabled={pagination.advanced?.currentPage === 1}
-                >
-                    Prev
-                </button>
-                <button
-                    onClick={() => handlePagination('advanced', 'next')}
-                    disabled={pagination.advanced?.currentPage === pagination.advanced?.totalPages}
-                >
-                    Next
-                </button>
+                <div className='pagination-container'>
+                    <button
+                        onClick={() => handlePagination('advanced', 'prev')}
+                        disabled={pagination.advanced?.currentPage === 1}
+                    >
+                        Prev
+                    </button>
+                    <button
+                        onClick={() => handlePagination('advanced', 'next')}
+                        disabled={pagination.advanced?.currentPage === pagination.advanced?.totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
         </div>

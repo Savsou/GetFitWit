@@ -228,7 +228,7 @@ const EditWorkoutProgram = () => {
                                 <img
                                     src={previewImage}
                                     alt="Workout Preview"
-                                    style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
+                                    style={{ width: '300px', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                                 />
                                 <button onClick={handleClearFile}>Remove</button>
                             </div>

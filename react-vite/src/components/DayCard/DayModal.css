@@ -93,6 +93,36 @@ li {
   margin-right: 1rem;
 }
 
+.edit-workout-button {
+  background-color: #1ca4ff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-workout-button:hover {
+  background-color: #097ecc;
+}
+
 .submit-close-button-container {
   margin-top: 1rem;
+}
+
+.close-button {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #b81724;
 }

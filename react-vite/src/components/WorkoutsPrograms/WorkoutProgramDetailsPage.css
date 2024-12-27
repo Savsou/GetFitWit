@@ -6,6 +6,25 @@
     padding: 20px;
 }
 
+.workout-program-details-title {
+    margin-bottom: 1rem;
+}
+
+.edit-program-button {
+    background-color: #1ca4ff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.edit-program-button:hover {
+    background-color: #097ecc;
+}
+
 .information-container {
     flex: 1;
     max-width: 40%;
@@ -18,7 +37,9 @@
 }
 
 .information-container img {
-    width: 100%;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -39,7 +60,7 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .week-title {
@@ -55,7 +76,12 @@
     margin: 0;
 }
 
-.remove-week-button {
+.delete-program-button {
+    margin-top: 3rem;
+}
+
+.remove-week-button,
+.delete-program-button {
     background-color: #e63946;
     color: white;
     border: none;
@@ -66,12 +92,13 @@
     transition: background-color 0.2s ease;
 }
 
-.remove-week-button:hover {
-    background-color: #d62828;
+.remove-week-button:hover,
+.delete-program-button:hover {
+    background-color: #b81724;
 }
 
 .add-week-button {
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -83,7 +110,7 @@
 }
 
 .add-week-button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }
 
 .days-container {

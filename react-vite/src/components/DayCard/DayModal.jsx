@@ -66,7 +66,12 @@ const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
             <div className='workouts-container'>
                 {isOwner && (
                     <div className='edit-workout-button-container'>
-                        <button onClick={handleEditButtonClick}>Edit</button>
+                        <button
+                            onClick={handleEditButtonClick}
+                            className='edit-workout-button'
+                        >
+                            Edit
+                        </button>
                     </div>
                 )}
                 {workouts.length > 0 ? (
@@ -96,7 +101,12 @@ const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
                 )}
             </div>
             <div className='submit-close-button-container'>
-                <button onClick={closeModal}>Close</button>
+                <button
+                    onClick={closeModal}
+                    className='close-button'
+                >
+                    Close
+                </button>
             </div>
         </div>
     );

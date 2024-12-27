@@ -31,16 +31,7 @@ const WorkoutProgramDetailsPage = () => {
     }, [currentWorkoutProgram?.weeks]);
 
 
-    if (isLoading) {
-        return (
-            <div className="loading-spinner">
-                <div className="spinner"></div>
-                <span>Loading...</span>
-            </div>
-        );
-    }
-
-    if (!currentWorkoutProgram) {
+    if (isLoading || !currentWorkoutProgram) {
         return (
             <div className="loading-spinner">
                 <div className="spinner"></div>
@@ -135,7 +126,7 @@ const WorkoutProgramDetailsPage = () => {
     return (
         <div className="page-container workout-programs-details">
             <div className="information-container">
-                <div>
+                <div className="workout-program-details-title">
                     <h1>{currentWorkoutProgram.programName}</h1>
                     {isOwner && (
                         <button
@@ -154,7 +145,12 @@ const WorkoutProgramDetailsPage = () => {
                     <p>{currentWorkoutProgram.description}</p>
                 </div>
                 {isOwner && (
-                    <button onClick={() => openDeleteModal('program')}>Delete Program</button>
+                    <button
+                        onClick={() => openDeleteModal('program')}
+                        className="delete-program-button"
+                    >
+                        Delete Program
+                    </button>
                 )}
             </div>
 
