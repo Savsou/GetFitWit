@@ -124,7 +124,7 @@ const WorkoutProgramDetailsPage = () => {
     const isOwner = currentUser?.id === currentWorkoutProgram?.userId
 
     return (
-        <div className="page-container workout-programs-details">
+        <div className="workout-programs-details">
             <div className="information-container">
                 <div className="workout-program-details-title">
                     <h1>{currentWorkoutProgram.programName}</h1>

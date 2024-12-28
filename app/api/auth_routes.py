@@ -39,6 +39,7 @@ def login():
 
         return {'message': "Login failed. Please check your credentials and try again."}, 401
 
+    print("FORM ERRORS HEREREREREREE:", form.errors)
     return form.errors, 401
 
 
@@ -75,7 +76,6 @@ def sign_up():
         login_user(user)
         return user.to_dict()
 
-    print("FORM ERRORS HEREREREREREE:", form.errors)
     return form.errors, 401
 
 
