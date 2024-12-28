@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorkoutPrograms, resetCurrentWorkoutProgram } from '../../redux/workoutprogram';
 import { fetchFavorites, loadFavorites } from '../../redux/favorites';
@@ -13,6 +13,11 @@ const HomePage = () => {
     const workoutPrograms = useSelector((state) => state.workoutPrograms.workoutPrograms);
     const pagination = useSelector((state) => state.workoutPrograms.pagination);
     const [localLoading, setLocalLoading] = useState(true);
+
+    // Create refs for each section
+    const beginnerRef = useRef(null);
+    const intermediateRef = useRef(null);
+    const advancedRef = useRef(null);
 
     //When switching back to the homepage, make sure it loads everything before showing the page and reset the current Workout Program state
     useEffect(() => {
@@ -38,9 +43,19 @@ const HomePage = () => {
     }, [dispatch, user]);
 
     const handlePagination = (difficulty, direction) => {
-        const currentPage = pagination[difficulty]?.currentPage || 1;
-        const newPage = direction === 'next' ? currentPage + 1 : currentPage - 1;
-        dispatch(fetchWorkoutPrograms(difficulty, newPage));
+        const sectionRef =
+            difficulty === 'beginner' ? beginnerRef : difficulty === 'intermediate'
+                ? intermediateRef
+                : advancedRef;
+
+        sectionRef.current?.scrollIntoView({ block: 'start', inline: 'nearest' });
+
+        //2 second delay so that the scroll effect has time to reset to top of container
+        setTimeout(() => {
+            const currentPage = pagination[difficulty]?.currentPage || 1;
+            const newPage = direction === 'next' ? currentPage + 1 : currentPage - 1;
+            dispatch(fetchWorkoutPrograms(difficulty, newPage));
+        }, 100);
     };
 
     if (localLoading || !workoutPrograms.beginner || !workoutPrograms.intermediate || !workoutPrograms.advanced) {
@@ -58,7 +73,7 @@ const HomePage = () => {
         <div className='page-container'>
 
             {/* Beginner Programs */}
-            <div>
+            <div ref={beginnerRef}>
                 <h2>Beginner Programs</h2>
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
@@ -84,7 +99,7 @@ const HomePage = () => {
             </div>
 
             {/* Intermediate Programs */}
-            <div>
+            <div ref={intermediateRef}>
                 <h2>Intermediate Programs</h2>
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
@@ -113,7 +128,7 @@ const HomePage = () => {
             </div>
 
             {/* Advanced Programs */}
-            <div>
+            <div ref={advancedRef}>
                 <h2>Advanced Programs</h2>
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
