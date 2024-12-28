@@ -125,6 +125,7 @@ export const addWorkoutProgram = (formData) => async (dispatch) => {
         if (response.ok) {
             const newWorkoutProgram = await response.json();
             dispatch(addWorkoutProgramAction(newWorkoutProgram));
+            return newWorkoutProgram
         }
         else if (response.status < 500) {
             const errorMessages = await response.json();

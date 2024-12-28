@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import WorkoutProgramCard from "../WorkoutsPrograms/WorkoutProgramCard";
 
 
 import "./UserProfilePage.css";
@@ -7,6 +9,7 @@ import "./UserProfilePage.css";
 const UserProfilePage = () => {
     const { userId } = useParams();
     const [user, setUser] = useState(null);
+    const favorites = useSelector((state) => state.favorites)
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -51,7 +54,16 @@ const UserProfilePage = () => {
                 </div>
             </div>
             <div className="user-workout-programs-container">
-                <h2>Workout Programs Made</h2>
+                <h2 className="workout-programs-list-title">Workout Programs Made</h2>
+                <div className="workout-card-container">
+                    {user.workoutPrograms && user.workoutPrograms.length > 0 ? (
+                        user.workoutPrograms.map((program) => (
+                            <WorkoutProgramCard key={program.id} program={program} favorites={favorites} />
+                        ))
+                    ) : (
+                        <p>No workout programs created yet.</p>
+                    )}
+                </div>
             </div>
         </div>
     )

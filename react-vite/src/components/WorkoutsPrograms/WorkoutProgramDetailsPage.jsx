@@ -159,16 +159,17 @@ const WorkoutProgramDetailsPage = () => {
                     <div key={weekIndex}>
                         <div className="week-title">
                             <h1>Week {weekIndex + 1}</h1>
-
-                            {isOwner && (
+                        </div>
+                        {isOwner && (
+                            <div className="remove-button-container">
                                 <button
                                     type="button"
                                     onClick={() => openDeleteModal('week', week.id)}
                                     className="remove-week-button">
                                     Remove Week
                                 </button>
-                            )}
-                        </div>
+                            </div>
+                        )}
 
                         <div className="days-container">
                             {week.days.map((day, dayIndex) => (

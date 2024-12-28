@@ -80,7 +80,7 @@ const CreateWorkoutProgram = () => {
         navigate('/');
     }
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -97,9 +97,7 @@ const CreateWorkoutProgram = () => {
 
         const serverResponse = await dispatch(addWorkoutProgram(formData));
 
-        console.log(serverResponse);
-
-        if (serverResponse) {
+        if (serverResponse.error) {
             setErrors(serverResponse)
         } else {
             setShowConfirmModal(true);
@@ -111,6 +109,8 @@ const CreateWorkoutProgram = () => {
             setWorkoutImageUrl(null);
             setPreviewImage(null);
             setErrors({});
+
+            navigate(`/workout_programs/${serverResponse.id}`);
         }
     }
 
@@ -150,7 +150,7 @@ const CreateWorkoutProgram = () => {
                                 value={difficulty}
                                 onChange={(e) => setDifficulty(e.target.value)}
                             >
-                                {DIFFICULTY_CHOICES.map (({value, label}) => (
+                                {DIFFICULTY_CHOICES.map(({ value, label }) => (
                                     <option key={value} value={value}>{label}</option>
                                 ))}
                             </select>
@@ -234,13 +234,13 @@ const CreateWorkoutProgram = () => {
                         <button
                             type="submit"
                             className="submit-button">
-                                Create
+                            Create
                         </button>
                         <button
                             type="button"
                             className="cancel-button"
                             onClick={handleCancel}>
-                                Cancel
+                            Cancel
                         </button>
                     </div>
                 </div>
@@ -248,11 +248,11 @@ const CreateWorkoutProgram = () => {
 
             {showConfirmModal && (
                 <ConfirmationModal
-                onClose={() => {
-                    setShowConfirmModal(false)
-                    navigate('/');
-                }}
-                message={"You have created a workout program!"}
+                    onClose={() => {
+                        setShowConfirmModal(false)
+                        navigate('/');
+                    }}
+                    message={"You have created a workout program!"}
                 />
             )}
 

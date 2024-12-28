@@ -46,3 +46,7 @@
 .edit-profile-button:hover {
     background-color: #097ecc;
 }
+
+.workout-programs-list-title {
+    border-bottom: 2px solid black;
+}
