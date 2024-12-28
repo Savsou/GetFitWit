@@ -83,7 +83,7 @@ def create_workout_program():
             url = upload["url"]
         else:
             #Can change to default image later
-            url = "https://res.cloudinary.com/dt3unm9lt/image/upload/v1733455470/msenyti81yrutkkwpnrz.jpg"
+            url = "https://res.cloudinary.com/dt3unm9lt/image/upload/v1735352594/GetFitWit/kfv7jilgklxkwrroadgw.jpg"
 
         newWorkoutProgram = WorkoutProgram(
             userId=current_user.id,

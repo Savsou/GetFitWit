@@ -62,7 +62,8 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            profileImageUrl="https://res.cloudinary.com/dt3unm9lt/image/upload/v1735352594/GetFitWit/kfv7jilgklxkwrroadgw.jpg"
         )
         db.session.add(user)
         db.session.commit()
@@ -74,6 +75,7 @@ def sign_up():
         login_user(user)
         return user.to_dict()
 
+    print("FORM ERRORS HEREREREREREE:", form.errors)
     return form.errors, 401
 
 

@@ -30,7 +30,7 @@ function SignupFormModal() {
         email,
         username,
         password,
-        confirmPassword,
+        confirm_password: confirmPassword,
       })
     );
 
@@ -85,14 +85,14 @@ function SignupFormModal() {
 
         <div className="form-group">
           <label className="label-name">Confirm Password</label>
-            <div className="input-error">
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
-            </div>
+          <div className="input-error">
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+          </div>
         </div>
 
         <div className="form-group">

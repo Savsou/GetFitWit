@@ -30,7 +30,7 @@ const HomePage = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (user !== null) {
+        if (user) {
             dispatch(fetchFavorites());
         } else {
             dispatch(loadFavorites([]));
