@@ -50,7 +50,7 @@ const HomePage = () => {
 
         sectionRef.current?.scrollIntoView({ block: 'start', inline: 'nearest' });
 
-        //2 second delay so that the scroll effect has time to reset to top of container
+        //100ms delay so that the scroll effect has time to reset to top of container
         setTimeout(() => {
             const currentPage = pagination[difficulty]?.currentPage || 1;
             const newPage = direction === 'next' ? currentPage + 1 : currentPage - 1;
