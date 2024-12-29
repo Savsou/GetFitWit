@@ -256,7 +256,7 @@ const EditWorkoutProgram = () => {
                 <ConfirmationModal
                     onClose={() => {
                         setShowConfirmModal(false);
-                        navigate('/');
+                        navigate(`/workout_programs/${workoutProgramId}`)
                     }}
                     message="You have updated the workout program!"
                 />
