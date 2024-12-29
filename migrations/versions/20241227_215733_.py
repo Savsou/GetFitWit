@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: fe9b909f430f
-Revises: 
+Revises:
 Create Date: 2024-12-27 21:57:33.189300
 
 """
@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('programName', sa.String(length=100), nullable=False),
     sa.Column('difficulty', sa.String(length=50), nullable=False),
     sa.Column('types', sa.JSON(), nullable=False),
-    sa.Column('equipments', sa.JSON(), nullable=False),
+    sa.Column('equipment', sa.JSON(), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('workoutImageUrl', sa.String(), nullable=True),
     sa.Column('createdAt', sa.DateTime(), nullable=False),

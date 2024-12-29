@@ -73,7 +73,7 @@ const HomePage = () => {
         <div className='page-container'>
 
             {/* Beginner Programs */}
-            <div ref={beginnerRef}>
+            <div className="program-difficulty-container" ref={beginnerRef}>
                 <h2>Beginner Programs</h2>
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
@@ -99,7 +99,7 @@ const HomePage = () => {
             </div>
 
             {/* Intermediate Programs */}
-            <div ref={intermediateRef}>
+            <div className="program-difficulty-container" ref={intermediateRef}>
                 <h2>Intermediate Programs</h2>
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>
@@ -128,7 +128,7 @@ const HomePage = () => {
             </div>
 
             {/* Advanced Programs */}
-            <div ref={advancedRef}>
+            <div className="program-difficulty-container" ref={advancedRef}>
                 <h2>Advanced Programs</h2>
                 <ul className='workout-programs-list'>
                     <div className='workout-card-container'>

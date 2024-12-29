@@ -24,7 +24,7 @@ def get_session_user_favorites():
                 "creatorUsername": program.user.username,
                 "description": program.description,
                 "difficulty": program.difficulty,
-                "equipments": program.equipments,
+                "equipment": program.equipment,
                 "types": program.types,
                 "workoutImageUrl": program.workoutImageUrl
             })
@@ -62,7 +62,7 @@ def add_to_favorites():
                     "creatorUsername": program["creatorUsername"],
                     "description": program["description"],
                     "difficulty": program["difficulty"],
-                    "equipments": program["equipments"],
+                    "equipment": program["equipment"],
                     "types": program["types"],
                     "workoutImageUrl": program["workoutImageUrl"]
                 }

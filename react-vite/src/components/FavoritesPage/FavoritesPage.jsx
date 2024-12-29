@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchFavorites } from "../../redux/favorites";
 import WorkoutProgramCard from "../WorkoutsPrograms/WorkoutProgramCard";
+import "./FavoritesPage.css"
 
 const FavoritesPage = () => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const FavoritesPage = () => {
                     ))}
                 </div>
             ) : (
-                <p>No favorite Workout Program Found.</p>
+                <h2 className="empty-favorite-text">You do not have any workout programs favorited!</h2>
             )}
         </div>
     )

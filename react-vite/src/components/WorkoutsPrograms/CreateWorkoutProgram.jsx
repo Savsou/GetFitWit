@@ -11,7 +11,7 @@ const CreateWorkoutProgram = () => {
     const [programName, setProgramName] = useState('');
     const [difficulty, setDifficulty] = useState('');
     const [types, setTypes] = useState([]);
-    const [equipments, setEquipments] = useState([]);
+    const [equipment, setEquipment] = useState([]);
     const [description, setDescription] = useState('');
     const [workoutImageUrl, setWorkoutImageUrl] = useState(null);
     const fileInputRef = useRef(null);
@@ -88,7 +88,7 @@ const CreateWorkoutProgram = () => {
         formData.append("difficulty", difficulty);
         //Send each type and equipment separately
         types.forEach(type => formData.append("types", type));
-        equipments.forEach(equipment => formData.append("equipments", equipment));
+        equipment.forEach(equipment => formData.append("equipment", equipment));
         formData.append("description", description);
 
         if (workoutImageUrl) {
@@ -104,7 +104,7 @@ const CreateWorkoutProgram = () => {
             setProgramName('');
             setDifficulty('');
             setTypes([]);
-            setEquipments([]);
+            setEquipment([]);
             setDescription('');
             setWorkoutImageUrl(null);
             setPreviewImage(null);
@@ -177,21 +177,21 @@ const CreateWorkoutProgram = () => {
                     </div>
 
                     <div className="input-group">
-                        <label>Equipments:</label>
+                        <label>Equipment:</label>
                         <div className="checkbox-group">
                             {EQUIPMENT_CHOICES.map(({ value, label }) => (
                                 <label key={value}>
                                     <input
                                         type="checkbox"
                                         value={value}
-                                        checked={equipments.includes(value)}
-                                        onChange={(e) => handleCheckboxChange(e, setEquipments)}
+                                        checked={equipment.includes(value)}
+                                        onChange={(e) => handleCheckboxChange(e, setEquipment)}
                                     />
                                     {label}
                                 </label>
                             ))}
                         </div>
-                        {errors.equipments && <span className="error-message">{errors.equipments}</span>}
+                        {errors.equipment && <span className="error-message">{errors.equipment}</span>}
                     </div>
 
                     <div className="input-group">
