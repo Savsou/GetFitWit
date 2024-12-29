@@ -67,10 +67,10 @@ def create_workout_program():
 
     form["csrf_token"].data = request.cookies.get("csrf_token")
 
-    #Ensure the types and equipments field are populated correctly for validation by populating
+    #Ensure the types and equipment field are populated correctly for validation by populating
     #the form with the data from the request
     form.types.process(request.form)
-    form.equipments.process(request.form)
+    form.equipment.process(request.form)
 
     if form.validate_on_submit():
         image = form.workoutImageUrl.data
@@ -90,7 +90,7 @@ def create_workout_program():
             programName=form.programName.data,
             difficulty=form.difficulty.data,
             types=form.types.data,
-            equipments=form.equipments.data,
+            equipment=form.equipment.data,
             description=form.description.data,
             workoutImageUrl=url
         )
@@ -159,7 +159,7 @@ def update_workout_program(workout_program_id):
         workoutProgram.programName = form.programName.data or workoutProgram.programName
         workoutProgram.difficulty = form.difficulty.data or workoutProgram.difficulty
         workoutProgram.types = form.types.data or workoutProgram.types
-        workoutProgram.equipments = form.equipments.data or workoutProgram.equipments
+        workoutProgram.equipment = form.equipment.data or workoutProgram.equipment
         workoutProgram.description = form.description.data or workoutProgram.description
 
         db.session.commit()

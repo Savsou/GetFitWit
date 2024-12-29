@@ -14,7 +14,7 @@ class WorkoutProgram(db.Model):
     programName = db.Column(db.String(100), nullable=False)
     difficulty = db.Column(db.String(50), nullable=False)
     types = db.Column(JSON, nullable=False)
-    equipments = db.Column(JSON, nullable=False)
+    equipment = db.Column(JSON, nullable=False)
     description = db.Column(db.String)
     workoutImageUrl = db.Column(db.String)
     createdAt = db.Column(db.DateTime, default=datetime.now, nullable=False)
@@ -39,7 +39,7 @@ class WorkoutProgram(db.Model):
             'programName': self.programName,
             'difficulty': self.difficulty,
             'types': self.types,
-            'equipments': self.equipments,
+            'equipment': self.equipment,
             'description': self.description,
             'workoutImageUrl': self.workoutImageUrl,
             'createdAt': self.createdAt,

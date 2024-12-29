@@ -11,7 +11,7 @@
 
 ## 2. Workout programs
 
-- Logged-in users can create a new Workout Program with their details (name of program, difficulty, type, duration, and equipments).
+- Logged-in users can create a new Workout Program with their details (name of program, difficulty, type, duration, and equipment).
 - Users can edit and delete their own Workout Programs.
 - All users (logged in or logged out) can browse products on the site.
 
@@ -21,11 +21,11 @@
 
 ### Create Workout Program
 
-- Logged-in users can create their workout programs' details, such as name, difficulty, type, duration and equipments.
+- Logged-in users can create their workout programs' details, such as name, difficulty, type, duration and equipment.
 
 ### Update Workout Program
 
-- Logged-in users can edit their workout programs' details, such as name, difficulty, type, duration or equipments.
+- Logged-in users can edit their workout programs' details, such as name, difficulty, type, duration or equipment.
 
 ### Delete Workout Program
 

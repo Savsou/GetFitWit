@@ -49,7 +49,11 @@ const UserProfilePage = () => {
                 </div>
                 <div className="profile-information">
                     <h1>{user.username}</h1>
-                    <p>{user.bio}</p>
+                    {user.bio ? (
+                        <p>{user.bio}</p>
+                    ) : (
+                        <p>Empty Bio</p>
+                    )}
                     <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
                 </div>
             </div>
@@ -61,7 +65,7 @@ const UserProfilePage = () => {
                             <WorkoutProgramCard key={program.id} program={program} favorites={favorites} />
                         ))
                     ) : (
-                        <p>No workout programs created yet.</p>
+                        <p>You have not created any workout programs yet.</p>
                     )}
                 </div>
             </div>

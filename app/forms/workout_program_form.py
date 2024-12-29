@@ -46,8 +46,8 @@ class WorkoutProgramForm(FlaskForm):
         choices=WORKOUT_TYPES,
         validators=[DataRequired(message="Please select at least one workout type.")]
     )
-    equipments = SelectMultipleField(
-        'equipments',
+    equipment = SelectMultipleField(
+        'equipment',
         choices=EQUIPMENT_CHOICES,
         validators=[DataRequired(message="Please select at least one equipment.")]
     )

@@ -35,8 +35,8 @@ const WorkoutProgramCard = ({ program, favorites }) => {
         )
         .join(', ');
 
-    // Capitalize each word in Equipments
-    const formattedEquipments = program.equipments
+    // Capitalize each word in Equipment
+    const formattedEquipment = program.equipment
         .map(equipment =>
             equipment.split('_')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -51,7 +51,7 @@ const WorkoutProgramCard = ({ program, favorites }) => {
                 <h3>{program.programName}</h3>
                 <p>Difficulty: {formattedDifficulty}</p>
                 <p>Type: {formattedTypes}</p>
-                <p>Equipments: {formattedEquipments}</p>
+                <p>Equipment: {formattedEquipment}</p>
             </div>
             {user && (
                 <div className="favorite-icon-container" onClick={toggleFavorite}>

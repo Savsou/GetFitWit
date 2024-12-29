@@ -113,7 +113,7 @@ const WorkoutProgramDetailsPage = () => {
         });
     };
 
-    const formattedEquipments = currentWorkoutProgram.equipments
+    const formattedEquipment = currentWorkoutProgram.equipment
         .map(equipment =>
             equipment.split('_')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -139,7 +139,7 @@ const WorkoutProgramDetailsPage = () => {
                 </div>
                 <img title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName} />
                 <p>Created By: {currentWorkoutProgram.creatorUsername}</p>
-                <p>Equipments: {formattedEquipments}</p>
+                <p>Equipment: {formattedEquipment}</p>
                 <div className="description-container">
                     <p>Description of the program:</p>
                     <p>{currentWorkoutProgram.description}</p>
