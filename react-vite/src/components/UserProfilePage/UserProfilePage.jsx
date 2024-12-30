@@ -8,6 +8,7 @@ import "./UserProfilePage.css";
 
 const UserProfilePage = () => {
     const { userId } = useParams();
+    const currentUser = useSelector((state) => state.session.user);
     const [user, setUser] = useState(null);
     const favorites = useSelector((state) => state.favorites)
 
@@ -41,6 +42,9 @@ const UserProfilePage = () => {
         alert("Coming Soon")
     }
 
+    //parseInt since getting from params is a string
+    const isCurrentUser = currentUser?.id === parseInt(userId, 10);
+
     return (
         <div className='page-container'>
             <div className="profile-information-container">
@@ -54,7 +58,10 @@ const UserProfilePage = () => {
                     ) : (
                         <p>Empty Bio</p>
                     )}
-                    <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
+
+                    {isCurrentUser && (
+                        <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
+                    )}
                 </div>
             </div>
             <div className="user-workout-programs-container">

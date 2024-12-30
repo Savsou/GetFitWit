@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWorkoutProgramById, deleteWorkoutProgram, fetchWorkoutPrograms } from "../../redux/workoutprogram";
 import { useNavigate } from "react-router-dom";
@@ -137,12 +137,17 @@ const WorkoutProgramDetailsPage = () => {
                         </button>
                     )}
                 </div>
-                <img title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName} />
-                <p>Created By: {currentWorkoutProgram.creatorUsername}</p>
+                <img className="workout-image" title={currentWorkoutProgram.programName} src={currentWorkoutProgram.workoutImageUrl} alt={currentWorkoutProgram.programName} />
                 <p>Equipment: {formattedEquipment}</p>
                 <div className="description-container">
                     <p>Description of the program:</p>
                     <p>{currentWorkoutProgram.description}</p>
+                </div>
+                <div className="created-by-container">
+                    <Link to={`/profile/${currentWorkoutProgram.userId}`} className="profile-image-container">
+                        <img src={currentWorkoutProgram.profileImageUrl} alt={currentWorkoutProgram.creatorUsername} />
+                    </Link>
+                    <p>Created By: {currentWorkoutProgram.creatorUsername}</p>
                 </div>
                 {isOwner && (
                     <button

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addWorkoutProgram } from "../../redux/workoutprogram";
 import "./CreateWorkoutProgram.css";
 import ConfirmationModal from "../../context/ConfirmationModal";
+import { WORKOUT_TYPES, EQUIPMENT_CHOICES, DIFFICULTY_CHOICES } from "./ChoiceHelpers";
 
 const CreateWorkoutProgram = () => {
     const navigate = useNavigate();
@@ -18,35 +19,6 @@ const CreateWorkoutProgram = () => {
     const [previewImage, setPreviewImage] = useState(null);
     const [errors, setErrors] = useState({});
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-    const WORKOUT_TYPES = [
-        { value: 'full_body', label: 'Full Body' },
-        { value: 'cardio', label: 'Cardio' },
-        { value: 'strength', label: 'Strength' },
-        { value: 'abs', label: 'Abs' },
-        { value: 'chest', label: 'Chest' },
-        { value: 'arms', label: 'Arms' },
-        { value: 'legs', label: 'Legs' },
-        { value: 'back', label: 'Back' },
-        { value: 'shoulders', label: 'Shoulders' },
-    ];
-
-    const EQUIPMENT_CHOICES = [
-        { value: 'none', label: 'None' },
-        { value: 'dumbbells', label: 'Dumbbells' },
-        { value: 'mat', label: 'Mat' },
-        { value: 'barbell', label: 'Barbell' },
-        { value: 'kettlebell', label: 'Kettlebell' },
-        { value: 'resistance_band', label: 'Resistance Band' },
-        { value: 'bench', label: 'Bench' },
-    ];
-
-    const DIFFICULTY_CHOICES = [
-        { value: '', label: 'Select Difficulty' },
-        { value: 'beginner', label: 'Beginner' },
-        { value: 'intermediate', label: 'Intermediate' },
-        { value: 'advanced', label: 'Advanced' },
-    ];
 
     const handleFileClick = (e) => {
         e.preventDefault();

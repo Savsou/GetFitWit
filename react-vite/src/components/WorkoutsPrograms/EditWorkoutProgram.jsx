@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchWorkoutProgramById, updateWorkoutProgram } from "../../redux/workoutprogram";
 import ConfirmationModal from "../../context/ConfirmationModal";
 import "./CreateWorkoutProgram.css";
+import { WORKOUT_TYPES, EQUIPMENT_CHOICES, DIFFICULTY_CHOICES } from "./ChoiceHelpers";
 
 const EditWorkoutProgram = () => {
     const { workoutProgramId } = useParams();
@@ -21,35 +22,6 @@ const EditWorkoutProgram = () => {
     const [previewImage, setPreviewImage] = useState(null);
     const [errors, setErrors] = useState({});
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-    const WORKOUT_TYPES = [
-        { value: 'full_body', label: 'Full Body' },
-        { value: 'cardio', label: 'Cardio' },
-        { value: 'strength', label: 'Strength' },
-        { value: 'abs', label: 'Abs' },
-        { value: 'chest', label: 'Chest' },
-        { value: 'arms', label: 'Arms' },
-        { value: 'legs', label: 'Legs' },
-        { value: 'back', label: 'Back' },
-        { value: 'shoulders', label: 'Shoulders' },
-    ];
-
-    const EQUIPMENT_CHOICES = [
-        { value: 'none', label: 'None' },
-        { value: 'dumbbells', label: 'Dumbbells' },
-        { value: 'mat', label: 'Mat' },
-        { value: 'barbell', label: 'Barbell' },
-        { value: 'kettlebell', label: 'Kettlebell' },
-        { value: 'resistance_band', label: 'Resistance Band' },
-        { value: 'bench', label: 'Bench' },
-    ];
-
-    const DIFFICULTY_CHOICES = [
-        { value: '', label: 'Select Difficulty' },
-        { value: 'beginner', label: 'Beginner' },
-        { value: 'intermediate', label: 'Intermediate' },
-        { value: 'advanced', label: 'Advanced' },
-    ];
 
     useEffect(() => {
         dispatch(fetchWorkoutProgramById(workoutProgramId));
