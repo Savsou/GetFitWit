@@ -216,7 +216,7 @@ export const updateWorkout = (workout) => async (dispatch) => {
     }
 };
 
-export const deleteWorkout = (workoutId) => async (dispatch) => {
+export const deleteWorkout = (workoutId, workoutProgramId) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
         const response = await fetch(`/api/workouts/${workoutId}`, {
@@ -232,11 +232,12 @@ export const deleteWorkout = (workoutId) => async (dispatch) => {
     } catch (error) {
         console.error("Error deleting workout:", error);
     } finally {
+        await dispatch(fetchWorkoutProgramById(workoutProgramId))
         dispatch(setLoading(false));
     }
 };
 
-export const addWorkout = (workout) => async (dispatch) => {
+export const addWorkout = (workout, workoutProgramId) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
         const response = await fetch('/api/workouts/', {
@@ -250,6 +251,7 @@ export const addWorkout = (workout) => async (dispatch) => {
         if (response.ok) {
             const newWorkout = await response.json();
             dispatch(addWorkoutAction(newWorkout));
+            await dispatch(fetchWorkoutProgramById(workoutProgramId))
             return newWorkout
         } else if (response.status < 500) {
             const errorMessages = await response.json();

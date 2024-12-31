@@ -50,7 +50,7 @@ const EditWorkoutModal = ({ workouts, day, onClose, onSave }) => {
         if (hasErrors) {
             setErrors(newErrors);
         } else {
-            dispatch(fetchWorkoutProgramById(workoutProgramId))
+            await dispatch(fetchWorkoutProgramById(workoutProgramId))
             onSave(editedWorkouts);
         }
     };
@@ -81,7 +81,7 @@ const EditWorkoutModal = ({ workouts, day, onClose, onSave }) => {
     const confirmDelete = async () => {
         if (workoutToDelete) {
             closeModal();
-            await dispatch(deleteWorkout(workoutToDelete));
+            await dispatch(deleteWorkout(workoutToDelete, workoutProgramId));
 
             // Update the workouts in the editedWorkouts array
             const updatedWorkouts = editedWorkouts.filter(workout => workout.id !== workoutToDelete);
@@ -96,7 +96,7 @@ const EditWorkoutModal = ({ workouts, day, onClose, onSave }) => {
         // Add the day.id to the new workout before updating
         const updatedWorkout = { ...newWorkout, dayId: day.id };
 
-        const response = await dispatch(addWorkout(updatedWorkout));
+        const response = await dispatch(addWorkout(updatedWorkout, workoutProgramId));
 
         // Initialize an empty errors object for this workout
         let workoutErrors = {};
