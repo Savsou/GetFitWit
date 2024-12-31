@@ -61,7 +61,7 @@ const WorkoutProgramDetailsPage = () => {
         } finally {
             //Re-enable add week button
             setIsAddingWeek(false);
-            dispatch(fetchWorkoutProgramById(workoutProgramId));
+            await dispatch(fetchWorkoutProgramById(workoutProgramId));
         }
     };
 
@@ -79,7 +79,7 @@ const WorkoutProgramDetailsPage = () => {
         } catch (error) {
             console.error('Error deleting week:', error);
         } finally {
-            dispatch(fetchWorkoutProgramById(workoutProgramId));
+            await dispatch(fetchWorkoutProgramById(workoutProgramId));
             closeModal();
         }
     };
