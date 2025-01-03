@@ -70,7 +70,7 @@ const CreateWorkoutProgram = () => {
         const serverResponse = await dispatch(addWorkoutProgram(formData));
 
         if (serverResponse.error) {
-            setErrors(serverResponse)
+            setErrors(serverResponse.error)
         } else {
             setShowConfirmModal(true);
             setProgramName('');
