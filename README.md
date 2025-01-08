@@ -1,3 +1,46 @@
+# GetFitWit
+
+GetFitWit is a workout website that is dedicated to providing users access to other users' workout programs that they have made! Create and share workout programs with others in a user-friendly way that others can follow. The site shows impressive css features such as auto-zoom on hover for workout program cards, dynamic pages and more. With about 2 weeks deadline, it came out better than expected. I hope to make this project be more refined and be the highlight of my resume.
+
+# Live Link
+
+https://getfitwit.onrender.com/
+
+## Tech Stack
+
+### Frameworks and Libraries
+<div style="display: flex; align-items: center; gap: 10px;">
+  <img src="https://img.shields.io/badge/-Python-3776ab?logo=python&logoColor=FFFF66&logoWidth=20" alt="Python" height="25">
+  <img src="https://img.shields.io/badge/-Flask-000000?logo=flask&logoColor=white&logoWidth=20" alt="Flask" height="25">
+  <img src="https://img.shields.io/badge/-Javascript-41454A?logo=javascript&logoColor=F7DF1E&logoWidth=20" alt="Javascript" height="25">
+  <img src="https://img.shields.io/badge/-React-263238?logo=react&logoColor=61DAFB&logoWidth=20" alt="React" height="25">
+  <img src="https://img.shields.io/badge/-Redux-764ABC?logo=redux&logoColor=white&logoWidth=20" alt="Redux" height="25">
+  <img src="https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&logoWidth=20" alt="CSS3" height="25">
+  <img src="https://img.shields.io/badge/-HTML5-E34F26?logo=HTML5&logoColor=white&logoWidth=20" alt="HTML5" height="25">
+</div>
+
+### Database:
+
+<img src="https://img.shields.io/badge/-PostgreSQL-4169E1?logo=postgresql&logoColor=white&logoWidth=20" alt="PostgreSQL" height="25">
+
+### Hosting:
+
+<img src="https://img.shields.io/badge/-Render-23c43e?logo=render&logoColor=white&logoWidth=20" alt="Render" height="25">
+
+### Connect With Me:
+
+<div style="display: flex; align-items: center; gap: 10px;">
+   <a href="https://www.linkedin.com/in/savannah-sou/" target="_blank">
+      <img src="./readme-logos/linkedin.png" alt="LinkedIn" width="25px"/>
+   </a>
+   <a href="mailto:savonna.sou@gmail.com">
+      <img src="./readme-logos/gmail.png" alt="Gmail" width="25px"/>
+   </a>
+</div>
+<br></br>
+
+# Index
+
 [Feature List](https://github.com/Savsou/GetFitWit/wiki/Features) | [DB Schema](https://github.com/Savsou/GetFitWit/wiki/DB-Schema) | [User Stories](https://github.com/Savsou/GetFitWit/wiki/User-Stories) | [Wireframes](https://github.com/Savsou/GetFitWit/wiki/Wireframes)
 
 # API Routes
