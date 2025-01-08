@@ -31,10 +31,10 @@ https://getfitwit.onrender.com/
 
 <div style="display: flex; align-items: center; gap: 10px;">
    <a href="https://www.linkedin.com/in/savannah-sou/" target="_blank">
-      <img src="./readme-logos/linkedin.png" alt="LinkedIn" width="25px"/>
+      <img src="./readme-logos/linkedin.png" alt="LinkedIn" width="25px" margin="0"/>
    </a>
    <a href="mailto:savonna.sou@gmail.com">
-      <img src="./readme-logos/gmail.png" alt="Gmail" width="25px"/>
+      <img src="./readme-logos/gmail.png" alt="Gmail" width="25px" margin="0"/>
    </a>
 </div>
 <br></br>
