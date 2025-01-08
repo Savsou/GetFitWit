@@ -29,15 +29,14 @@ https://getfitwit.onrender.com/
 
 ### Connect With Me:
 
-<div style="display: flex; align-items: center; gap: 10px;">
-   <a href="https://www.linkedin.com/in/savannah-sou/" target="_blank">
-      <img src="./readme-logos/linkedin.png" alt="LinkedIn" width="25px" margin="0"/>
-   </a>
+[<img align="left" alt="savonnasou | LinkedIn" width="22px" src="./readme-logos/linkedin.png" style="margin-right: 10px;" />][linkedin]
 
-   <a href="mailto:savonna.sou@gmail.com">
-      <img src="./readme-logos/gmail.png" alt="Gmail" width="25px" margin="0"/>
-   </a>
-</div>
+[linkedin]: https://www.linkedin.com/in/savannah-sou/
+
+[<img align="left" alt="savonnasou | Gmail" width="22px" src="./readme-logos/gmail.png" style="margin-right: 10px;" />][gmail]
+
+[gmail]: mailto:savonna.sou@gmail.com
+
 <br></br>
 
 # Index
