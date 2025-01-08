@@ -29,11 +29,11 @@ https://getfitwit.onrender.com/
 
 ### Connect With Me:
 
-[<img align="left" alt="savonnasou | LinkedIn" width="22px" src="./readme-logos/linkedin.png" style="margin-right: 10px;" />][linkedin]
+[<img align="left" alt="savonnasou | LinkedIn" width="22px" src="./readme-logos/linkedin.png" style="margin: 5px;" />][linkedin]
 
 [linkedin]: https://www.linkedin.com/in/savannah-sou/
 
-[<img align="left" alt="savonnasou | Gmail" width="22px" src="./readme-logos/gmail.png" style="margin-right: 10px;" />][gmail]
+[<img align="left" alt="savonnasou | Gmail" width="22px" src="./readme-logos/gmail.png" style="margin: 5px;" />][gmail]
 
 [gmail]: mailto:savonna.sou@gmail.com
 
