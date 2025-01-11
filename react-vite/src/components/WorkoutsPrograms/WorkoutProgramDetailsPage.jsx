@@ -25,10 +25,10 @@ const WorkoutProgramDetailsPage = () => {
     }, [dispatch, workoutProgramId])
 
     useEffect(() => {
-        if (currentWorkoutProgram?.weeks) {
+        if (!weeks.length && currentWorkoutProgram?.weeks) {
             setWeeks(currentWorkoutProgram.weeks);
         }
-    }, [currentWorkoutProgram?.weeks]);
+    }, [currentWorkoutProgram?.weeks, weeks.length]);
 
 
     if (isLoading || !currentWorkoutProgram) {
@@ -105,39 +105,42 @@ const WorkoutProgramDetailsPage = () => {
 
     //updated for production, to try and fix rest day inconsistency
     const handleToggleRestDay = (weekIndex, dayIndex) => {
-        setWeeks(prevWeeks =>
-            prevWeeks.map((week, i) => {
+        setWeeks(prevWeeks => {
+            const updatedWeeks = prevWeeks.map((week, i) => {
                 if (i !== weekIndex) return week;
 
-                // Update the specific week by creating a new array for its days
                 return {
                     ...week,
                     days: week.days.map((day, j) => {
                         if (j !== dayIndex) return day;
-
-                        // Toggle the restDay property for the specific day
                         return { ...day, restDay: !day.restDay };
-                    })
+                    }),
                 };
-            })
-        );
+            });
 
-        // Get the ID of the day being updated
-        const dayId = weeks[weekIndex].days[dayIndex].id;
+            return updatedWeeks;
+        });
+
+        const dayId = weeks[weekIndex]?.days?.[dayIndex]?.id;
+        if (!dayId) {
+            console.error("Day ID not found during toggle!");
+            return;
+        }
 
         fetch(`/api/days/${dayId}/rest`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
         })
             .then(response => {
                 if (!response.ok) {
-                    console.error('Failed to update rest day on the server');
+                    console.error("Failed to update rest day on the server");
                 }
             })
             .catch(error => {
-                console.error('Error updating rest day:', error);
+                console.error("Error updating rest day:", error);
             });
     };
+
 
 
     const formattedEquipment = currentWorkoutProgram.equipment
