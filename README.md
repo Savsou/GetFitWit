@@ -43,6 +43,22 @@ https://getfitwit.onrender.com/
 
 [Feature List](https://github.com/Savsou/GetFitWit/wiki/Features) | [DB Schema](https://github.com/Savsou/GetFitWit/wiki/DB-Schema) | [User Stories](https://github.com/Savsou/GetFitWit/wiki/User-Stories) | [Wireframes](https://github.com/Savsou/GetFitWit/wiki/Wireframes)
 
+# Landing Page
+
+![landingpage](https://github.com/user-attachments/assets/fcbff675-8e27-4b79-8e8f-acfb2f64efb9)
+
+# Workout Program
+
+![chrome_n7BwY5WUtm](https://github.com/user-attachments/assets/abbfd389-84b7-48bb-a671-3cfed60aba75)
+
+# Workouts
+
+![chrome_O1Oi28KqB6](https://github.com/user-attachments/assets/51ee6dd9-53d3-427a-8d65-4781169769cb)
+
+# Favorite
+
+![chrome_hdHE9gxnnX](https://github.com/user-attachments/assets/ecadcff0-ca68-450f-a8c5-caa0deb0dec6)
+
 # API Routes
 
 ## Users
@@ -973,25 +989,23 @@ Users can add a workout program to their favorite list.
 
 ## Getting started
 
-1. Clone this repository (only this branch).
-
-2. Install dependencies.
+1. Install dependencies.
 
    ```bash
    pipenv install -r requirements.txt
    ```
 
-3. Create a __.env__ file based on the example with proper settings for your
+2. Create a __.env__ file based on the example with proper settings for your
    development environment.
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+3. Make sure the SQLite3 database connection URL is in the __.env__ file.
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
+4. This starter organizes all tables inside the `flask_schema` schema, defined
    by the `SCHEMA` environment variable.  Replace the value for
    `SCHEMA` with a unique name, **making sure you use the snake_case
    convention.**
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
+5. Get into your pipenv, migrate your database, seed your database, and run your
    Flask app:
 
    ```bash
@@ -1010,11 +1024,7 @@ Users can add a workout program to their favorite list.
    flask run
    ```
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
-
-8. To run the React frontend in development, `cd` into the __react-vite__
+6. To run the React frontend in development, `cd` into the __react-vite__
    directory and run `npm i` to install dependencies. Next, run `npm run build`
    to create the `dist` folder. The starter has modified the `npm run build`
    command to include the `--watch` flag. This flag will rebuild the __dist__
