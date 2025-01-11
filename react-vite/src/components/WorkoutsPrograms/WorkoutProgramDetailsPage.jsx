@@ -103,17 +103,42 @@ const WorkoutProgramDetailsPage = () => {
         navigate('/');
     }
 
+    //updated for production, to try and fix rest day inconsistency
     const handleToggleRestDay = (weekIndex, dayIndex) => {
-        const updatedWeeks = [...weeks];
-        const updatedDay = { ...updatedWeeks[weekIndex].days[dayIndex], restDay: !updatedWeeks[weekIndex].days[dayIndex].restDay };
-        updatedWeeks[weekIndex].days[dayIndex] = updatedDay;
-        setWeeks(updatedWeeks);
+        setWeeks(prevWeeks =>
+            prevWeeks.map((week, i) => {
+                if (i !== weekIndex) return week;
 
-        fetch(`/api/days/${updatedDay.id}/rest`, {
+                // Update the specific week by creating a new array for its days
+                return {
+                    ...week,
+                    days: week.days.map((day, j) => {
+                        if (j !== dayIndex) return day;
+
+                        // Toggle the restDay property for the specific day
+                        return { ...day, restDay: !day.restDay };
+                    })
+                };
+            })
+        );
+
+        // Get the ID of the day being updated
+        const dayId = weeks[weekIndex].days[dayIndex].id;
+
+        fetch(`/api/days/${dayId}/rest`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-        });
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to update rest day on the server');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating rest day:', error);
+            });
     };
+
 
     const formattedEquipment = currentWorkoutProgram.equipment
         .map(equipment =>
