@@ -1,4 +1,6 @@
 import "./Footer.css"
+import linkedinLogo from "../../../../logos/linkedin-logo.png";
+import githubLogo from "../../../../logos/github-logo.png";
 
 const Footer = () => {
 
@@ -6,11 +8,20 @@ const Footer = () => {
         <footer className="footer-container">
             <div className="footer-content">
                 <div>
-                    <p>Created By:</p>
-                    <p>Savannah Sou</p>
+                    <a href="https://github.com/Savsou/GetFitWit">
+                        <img src={githubLogo} alt="github-logo" className="social-icon github-icon" />
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/savannah-sou/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img src={linkedinLogo} alt="savannah-linkedin" className="social-icon" />
+                    </a>
+                    <p>Savannah Sou © 2025</p>
                 </div>
                 <div>
-                    <img src="https://res.cloudinary.com/dt3unm9lt/image/upload/v1735511927/GetFitWit/hkbcy6f1bo0jvlqqd791.png" alt="getfitwit" />
+                    <img src="https://res.cloudinary.com/dt3unm9lt/image/upload/v1735511927/GetFitWit/hkbcy6f1bo0jvlqqd791.png" alt="getfitwit" className="site-logo" />
                 </div>
                 <div className="footer-information">
                     <p>About</p>
@@ -18,6 +29,7 @@ const Footer = () => {
                     <p>Terms & Conditions</p>
                     <p>Privacy Policy</p>
                 </div>
+
             </div>
         </footer>
     )

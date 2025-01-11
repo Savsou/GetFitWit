@@ -14,10 +14,21 @@
     width: 80%;
 }
 
-.footer-content img {
+.site-logo {
     height: 200px;
     width: 200px;
 }
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    margin: 0 10px;
+}
+
+.github-icon {
+    filter: invert(1);
+}
+
 
 @media (max-width: 768px) {
     .footer-content {
