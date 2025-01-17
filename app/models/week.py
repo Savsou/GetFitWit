@@ -36,12 +36,20 @@ class Week(db.Model):
 
         db.session.commit()
 
+    def get_days(self):
+        return Day.query.filter_by(weekId=self.id).order_by(
+            db.case(
+                {"Sunday": 0, "Monday": 1, "Tuesday": 2, "Wednesday": 3, "Thursday": 4, "Friday": 5, "Saturday": 6},
+                value=Day.name
+            )
+        ).all()
+
     def to_dict(self):
         return {
             'id': self.id,
             'workoutProgramId': self.workoutProgramId,
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,
-            'days': [day.to_dict() for day in self.days],
+            'days': [day.to_dict() for day in self.get_days()],
             # 'workouts': [workout.to_dict() for workout in self.workouts],
         }
