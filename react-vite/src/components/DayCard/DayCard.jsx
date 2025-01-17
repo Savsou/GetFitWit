@@ -2,7 +2,7 @@ import { useModal } from '../../context/Modal';
 import DayModal from './DayModal';
 import "./DayCard.css"
 
-const DayCard = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
+const DayCard = ({ day, isOwner, onToggleRestDay }) => {
     const { setModalContent, closeModal } = useModal();
 
     const handleCardClick = () => {
@@ -11,8 +11,6 @@ const DayCard = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
                 day={day}
                 onClose={closeModal}
                 isOwner={isOwner}
-                weekIndex={weekIndex}
-                dayIndex={dayIndex}
                 onToggleRestDay={onToggleRestDay}
             />
         );

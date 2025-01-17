@@ -17,6 +17,7 @@ const WorkoutProgramDetailsPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [weekToDelete, setWeekToDelete] = useState();
     const [weeks, setWeeks] = useState([]);
+    const [days, setDays] = useState([]);
     const [isAddingWeek, setIsAddingWeek] = useState(false);
     const [deleteType, setDeleteType] = useState(null);
 
@@ -27,6 +28,10 @@ const WorkoutProgramDetailsPage = () => {
     useEffect(() => {
         if (currentWorkoutProgram?.weeks) {
             setWeeks(currentWorkoutProgram.weeks);
+            const allDays = currentWorkoutProgram.weeks.flatMap(week =>
+                week.days.map(day => ({ ...day, weekId: week.id }))
+            );
+            setDays(allDays);
         }
     }, [currentWorkoutProgram?.weeks]);
 
@@ -103,13 +108,14 @@ const WorkoutProgramDetailsPage = () => {
         navigate('/');
     }
 
-    const handleToggleRestDay = (weekIndex, dayIndex) => {
-        const updatedWeeks = [...weeks];
-        const updatedDay = { ...updatedWeeks[weekIndex].days[dayIndex], restDay: !updatedWeeks[weekIndex].days[dayIndex].restDay };
-        updatedWeeks[weekIndex].days[dayIndex] = updatedDay;
-        setWeeks(updatedWeeks);
+    const handleToggleRestDay = (dayId) => {
+        setDays(prevDays =>
+            prevDays.map(day =>
+                day.id === dayId ? { ...day, restDay: !day.restDay } : day
+            )
+        );
 
-        fetch(`/api/days/${updatedDay.id}/rest`, {
+        fetch(`/api/days/${dayId}/rest`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -122,6 +128,11 @@ const WorkoutProgramDetailsPage = () => {
                 .join(' ')
         )
         .join(', ');
+
+    const groupedDays = weeks.map(week => ({
+        ...week,
+        days: days.filter(day => day.weekId === week.id),
+    }));
 
     const isOwner = currentUser?.id === currentWorkoutProgram?.userId
 
@@ -162,7 +173,7 @@ const WorkoutProgramDetailsPage = () => {
             </div>
 
             <div className="weeks-container">
-                {weeks.map((week, weekIndex) => (
+                {groupedDays.map((week, weekIndex) => (
                     <div key={weekIndex}>
                         <div className="week-title">
                             <h1>Week {weekIndex + 1}</h1>
@@ -179,14 +190,12 @@ const WorkoutProgramDetailsPage = () => {
                         )}
 
                         <div className="days-container">
-                            {week.days.map((day, dayIndex) => (
+                            {week.days.map((day) => (
                                 <DayCard
                                     key={day.id}
                                     day={day}
                                     isOwner={isOwner}
-                                    weekIndex={weekIndex}
-                                    dayIndex={dayIndex}
-                                    onToggleRestDay={() => handleToggleRestDay(weekIndex, dayIndex)}
+                                    onToggleRestDay={() => handleToggleRestDay(day.id)}
                                 />
                             ))}
                         </div>

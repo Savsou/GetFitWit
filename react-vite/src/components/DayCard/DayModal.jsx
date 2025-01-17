@@ -3,7 +3,7 @@ import { useModal } from '../../context/Modal';
 import EditWorkoutModal from '../EditWorkoutModal/EditWorkoutModal';
 import './DayModal.css';
 
-const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
+const DayModal = ({ day, isOwner, onToggleRestDay }) => {
     const { setModalContent, closeModal } = useModal();
     const [isRestDay, setIsRestDay] = useState(day.restDay);
     const [workouts, setWorkouts] = useState(day.workouts);
@@ -14,7 +14,7 @@ const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
     }, [day]);
 
     const handleToggleRestDay = () => {
-        onToggleRestDay(weekIndex, dayIndex);
+        onToggleRestDay(day.id);
         setIsRestDay(prevState => !prevState);
     };
 
@@ -36,8 +36,6 @@ const DayModal = ({ day, isOwner, weekIndex, dayIndex, onToggleRestDay }) => {
             <DayModal
                 day={{ ...day, workouts: updatedWorkouts }}
                 isOwner={isOwner}
-                weekIndex={weekIndex}
-                dayIndex={dayIndex}
                 onToggleRestDay={onToggleRestDay}
             />
         )
