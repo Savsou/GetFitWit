@@ -131,7 +131,9 @@ const WorkoutProgramDetailsPage = () => {
 
     const groupedDays = weeks.map(week => ({
         ...week,
-        days: days.filter(day => day.weekId === week.id),
+        days: days
+            .filter(day => day.weekId === week.id)
+            .sort((a, b) => a.dayOrder - b.dayOrder),
     }));
 
     const isOwner = currentUser?.id === currentWorkoutProgram?.userId
